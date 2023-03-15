@@ -1,0 +1,46 @@
+<header id="header">
+  <div class="nav-top">
+    <a href="/" class="logo">Quantum</a>
+    <div class="search-box">
+      <form action="#" method="get">
+        <div class="inputs">
+          <input type="submit" id="submit-search" value="">
+          <input type="text" placeholder="Search goods" name="search-term">
+        </div>
+        <div class="select">
+          <select name="category" id="category-to-search">
+            <option value="" selected="selected">
+              Category >
+            </option>
+            {{# each categories }}
+              <option value={{this.idcategory}}>{{this.categoryname}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </form>
+    </div>
+    <div class="actions-items">
+      <div class="action-item">
+        <img src="/img/icons/ic_shopping_cart.png" alt="Items in cart">
+        <a href="/cart"><span id="items-in-cart"></span>Items</a>
+      </div>
+      <div class="action-item">
+        <img src="/img/icons/ic_favorite_border.png" alt="Items in wishlist">
+        <a href="/wishlist">Wish List</a>
+      </div>
+      <div class="action-item">
+        <img src="/img/icons/ic_account_circle.png" alt="Sign In">
+        {{# if user }}
+          <div class="user-session">
+            <p class="username">{{user.username}}</p>
+            <a href="/log-out">Log Out</a>
+          </div>
+        {{ else }}
+          <a href="/sign-in">Sign In</a>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  <div class="line-div"></div>
+  
+</header>
