@@ -46,15 +46,30 @@ class productsDAO {
 
     });
   }
-  getById(ids) {
+  getByIdWithQuantity(idQuantities) {
     return new Promise((resolve, reject) => {
-      this.connection.query(`select * from products where id in (${ids})`,
-          (err, result) => {
-            if (err) return reject(err);
-            return resolve(result);
+      const ids = idQuantities.map(item => item.id);
+      this.connection.query(`SELECT * FROM products WHERE id IN (${ids})`,
+        (err, result) => {
+          if (err) return reject(err);
+  
+          const productsWithQuantity = result.map(product => {
+            const item = idQuantities.find(i => String(i.id) === String(product.id));
+            if (item) {
+              return {
+                ...product,
+                quantity: item.quantity
+              };
+            } else {
+              return product;
+            }
           });
+  
+          return resolve(productsWithQuantity);
+        });
     });
   }
+  
 }
 
 module.exports = () => productsDAO;

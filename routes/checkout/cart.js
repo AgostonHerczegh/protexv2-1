@@ -14,7 +14,7 @@ module.exports = (app) => {
       });
     }
 
-    productsDao.getById(productsInCartIds)
+    productsDao.getByIdWithQuantity(productsInCartIds)
         .then((products) => {
           res.render('checkout/cart', {
             title: 'Cart',
@@ -27,12 +27,18 @@ module.exports = (app) => {
   });
 
 
-  app.get('/add-to-cart/:id', (req, res) => {
-    const productId = req.params.id;
+  app.get('/add-to-cart/:id', (req, res,next) => {
+    
     const cart = req.session.user.cart
-    cart.push(productId)
-      req.session.user.cart=cart;
-
-      res.redirect('/')
+    const product = cart.find(item => item.id === req.params.id)
+    if(product){
+        product.quantity+=1
+    }else{
+        const productId = {id:req.params.id,quantity:1}
+        cart.push(productId)
+    }
+    req.session.user.cart=cart;
+    console.log(req.session.user.cart)
+    res.redirect('/');
   });
 };
