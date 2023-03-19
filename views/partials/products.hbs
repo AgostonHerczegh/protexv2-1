@@ -4,9 +4,9 @@
   <main>
     <nav>
       <ul class="filters">
-        <li class="filter"><a href="/order/rating">Popular products</a></li>
-        <li class="filter"><a href="/order/low-price">Low price</a></li>
-        <li class="filter"><a href="/order/price">High price</a></li>
+        <li class="filter"><a href="/order/rating">Népszerű termékek</a></li>
+        <li class="filter"><a href="/order/low-price">Alacsony-Magas ár</a></li>
+        <li class="filter"><a href="/order/price">Magas-Alacsony ár</a></li>
       </ul>
       <div class="display">
         <div class="vertical-line"></div>
@@ -27,7 +27,7 @@
           <img src="/img/products/{{this.img_url}}" alt="{{this.name}}" class="product-img">
           <p class="name">{{this.name}}</p>
           <div class="price">
-            <p class="price-value">$ {{this.price}}</p>
+            <p class="price-value">{{this.price}} Ft</p>
           </div>
           <a href="/add-to-cart/{{this.id}}">
               <div class="white-button">Vásárlás</div>

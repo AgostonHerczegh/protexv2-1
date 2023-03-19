@@ -4,20 +4,20 @@ module.exports = (app) => {
     const connection = app.dao.connectionFactory();
     const productsDao = new app.dao.productsDAO(connection);
 
-    // Get list of ID of product in cart
+    // Terméklista ID-k a kosárban
     const productsInCartIds = req.session.user.cart
     console.log(productsInCartIds)
     if (productsInCartIds.length == 0) {
       res.render('checkout/cart', {
-        title: 'Cart',
-        warning: 'You do not have items in your cart!',
+        title: 'Kosár',
+        warning: 'Nincs még termék a kosaradban!',
       });
     }
 
     productsDao.getByIdWithQuantity(productsInCartIds)
         .then((products) => {
           res.render('checkout/cart', {
-            title: 'Cart',
+            title: 'Kosár',
             success, warning,
             products,
             user:req.session.user

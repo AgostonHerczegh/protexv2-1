@@ -1,42 +1,35 @@
 <header id="header">
   <div class="nav-top">
-    <a href="/" class="logo">Quantum</a>
+    <a href="/" class="logo">PROTEX</a>
+
+    {{!--ezt kéne átírni valahogy úgy hogy a search input végig a "search-box"ban legyen 
+    ne pedig csak egy kicsi inputként--}}
     <div class="search-box">
       <form action="#" method="get">
         <div class="inputs">
           <input type="submit" id="submit-search" value="">
-          <input type="text" placeholder="Search goods" name="search-term">
-        </div>
-        <div class="select">
-          <select name="category" id="category-to-search">
-            <option value="" selected="selected">
-              Category >
-            </option>
-            {{# each categories }}
-              <option value={{this.idcategory}}>{{this.categoryname}}</option>
-            {{/each}}
-          </select>
+          <input type="text" placeholder="Találd meg kedvenced!" name="search-term">
         </div>
       </form>
     </div>
     <div class="actions-items">
       <div class="action-item">
         <img src="/img/icons/ic_shopping_cart.png" alt="Items in cart">
-        <a href="/cart"><span id="items-in-cart"></span>Items</a>
+        <a href="/cart"><span id="items-in-cart"></span>Kosár</a>
       </div>
       <div class="action-item">
-        <img src="/img/icons/ic_favorite_border.png" alt="Items in wishlist">
-        <a href="/wishlist">Wish List</a>
+        <img src="/img/icons/ic_favorite_border.png" alt="Kívánságlista">
+        <a href="/wishlist">Kívánságlista</a>
       </div>
       <div class="action-item">
         <img src="/img/icons/ic_account_circle.png" alt="Sign In">
         {{# if user }}
           <div class="user-session">
-            <p class="username">{{user.username}}</p>
-            <a href="/log-out">Log Out</a>
+            <p class="username">Helló {{user.username}}!</p>
+            <a href="/log-out">Kijelentkezés</a>
           </div>
         {{ else }}
-          <a href="/sign-in">Sign In</a>
+          <a href="/sign-in">Bejelentkezés</a>
         {{/if}}
       </div>
     </div>

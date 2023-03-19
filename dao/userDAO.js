@@ -17,10 +17,10 @@ class UserDAO {
                           [username, email, cryptedPassword],
                           (err, result) => {
                             if (err) return reject(err);
-                            return resolve('User was created!');
+                            return resolve('Sikeres regisztráció!');
                           });
                 } else if (err) return reject(err);
-                else return reject('Email or Username already exist');
+                else return reject('Már létezik ilyen felhasználó!');
               });
     });
   }
@@ -31,12 +31,12 @@ class UserDAO {
             if (err) return reject(err);
 
             const emailNotExist = Object.entries(result).length === 0;
-            if (emailNotExist) return reject('Email is not registered!');
+            if (emailNotExist) return reject('Nincs ilyen felhasználó!');
 
             else {
               const IsPasswordCorrect = bcrypt.compareSync(password, result[0].password);
-              if (IsPasswordCorrect) return resolve('Welcome to Ecommerce Quantum');
-              else return reject('Password is not correct!');
+              if (IsPasswordCorrect) return resolve('Üdvözöllek a Protex webshopban!');
+              else return reject('Helytelen jelszó!');
             }
           });
     });

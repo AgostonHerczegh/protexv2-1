@@ -3,12 +3,12 @@ module.exports = (app) => {
     let success; const warning = app.helpers.msg(req);
 
     if (req.session['user'] || req.session['user'] != null) {
-      req.session['warning'] = 'You are not able to access this area!';
+      req.session['warning'] = 'Nincs engedélye megtekinteni ezt az oldalt!';
       return res.redirect('/');
     }
 
     res.render('sign/in', {
-      title: 'Sign In',
+      title: 'Bejelentkezés',
       success, warning,
       csrfToken: req.csrfToken(),
     });
@@ -18,8 +18,8 @@ module.exports = (app) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    req.checkBody('email', 'Email is not Valid!').notEmpty().isEmail();
-    req.checkBody('password', 'Password must be at least 4 digits!')
+    req.checkBody('email', 'Érvényes email-t adjon meg!').notEmpty().isEmail();
+    req.checkBody('password', 'Minimum 4 karakteres jelszavat adjon meg!')
         .notEmpty().isLength({min: 4});
     const errorsInValidation = req.validationErrors();
     if (errorsInValidation) {

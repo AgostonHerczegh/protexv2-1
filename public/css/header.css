@@ -33,6 +33,7 @@ header .search-box form {
 header .search-box form .inputs {
   display: flex;
   align-items: center;
+
 }
 header .search-box form input[type='text'] {
   border: none;

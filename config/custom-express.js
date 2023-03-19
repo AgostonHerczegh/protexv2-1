@@ -55,7 +55,7 @@ class AppController {
   errors() {
     this.app.use((req, res, next) => {
       return res.status(404)
-          .render('errors/404', {title: 'Page not Found - 404'});
+          .render('errors/404', {title: 'Az oldal nem található :(  404'});
     });
     // this.app.use((erros, req, res, next) => {
     //   return res.status(500)
