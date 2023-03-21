@@ -27,10 +27,19 @@
           <div class="user-session">
             <a href="/log-out">Kijelentkezés</a>
           </div>
+          <div class="user-session">
+            <p class="hello">Helló, {{session.username}}</p>
+          </div>
         {{ else }}
           <a href="/sign-in">Bejelentkezés</a>
         {{/if}}
       </div>
+    </div>
+
+    <div class="action-item">
+     <div id="admin-panel" style="display: none;">
+    <!-- Admin panel content here... -->
+    </div>
     </div>
   </div>
   <div class="line-div"></div>

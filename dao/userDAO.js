@@ -50,6 +50,15 @@ class UserDAO {
           });
     });
   }
+  checkUserType(user_type) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('select user_type from users where user_type = ?', user_type,
+          (err, result) => {
+            if (err) return reject(err);
+            return resolve(result[0].user_type);
+          });
+    });
+  }
 }
 
 module.exports = () => UserDAO;

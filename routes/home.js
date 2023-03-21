@@ -12,14 +12,15 @@ module.exports = (app) => {
     productsDAO.list(9)
         .then((result) => products = result)
         .catch((err) => warning = 'Nem lehetett betölteni a termékeket');
+        
+    //Megvárja a kategóriák és a termékek betöltését, majd rendereli a home/index.js-t
+        const render = () => res.status(200).render('home/index', {
+      title: 'Termékek | Protex',
+      categories, products,
+      success, warning,
+      user: req.session['user'],
+    });
 
-    setTimeout(() => {
-      res.status(200).render('home/index', {
-        title: 'Termékek | Protex',
-        categories, products,
-        success, warning,
-        user: req.session['user'],
-      });
-    }, 100);
+    setTimeout(render, 100);
   });
 };
