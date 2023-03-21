@@ -2,37 +2,24 @@
   <aside>
   </aside>
   <main>
-    <nav>
-      <ul class="filters">
-        <li class="filter"><a href="/order/rating">Népszerű termékek</a></li>
-        <li class="filter"><a href="/order/low-price">Alacsony-Magas ár</a></li>
-        <li class="filter"><a href="/order/price">Magas-Alacsony ár</a></li>
-      </ul>
-      <div class="display">
-        <div class="vertical-line"></div>
-        <a href="#">
-          <img src="/img/icons/ic_view_grid.png" alt="Display Grid">
-        </a>
-        <div class="vertical-line"></div>
-        <a href="#">
-          <img src="/img/icons/ic_view_list.png" alt="Display Line">
-        </a>
-      </div>
-    </nav>
-<div class="products-list">
-      {{# each products}}
-        <form class="product">
-        <br>
-          <img src="/img/products/{{this.img_url}}" alt="{{this.name}}" class="product-img">
-          <p class="name">{{this.name}}</p>
 
-          <div class="price">
-            <p class="price-value">{{this.price}} ft</p>
-            </a>
+<div class="cart">
+      <h1>Kosár</h1>
+      <div class="cart-items">
+        {{#each products}}
+        <div class="cart-item">
+          <div >
+            <img src="/img/products/{{this.img_url}}" class="cart-item-img" alt="{{this.name}}"></div>
+          <div class="cart-item-info">
+            <p class="cart-item-name">{{this.name}}</p>
+            <p class="cart-item-price">{{this.price}} Ft</p>
+            <p class="cart-item-quantity">Mennyiség: {{this.quantity}}</p>
           </div>
-          <div>{{this.quantity}}</div>
-        </form>
-      {{/each}}
+          <div class="cart-item-remove">
+            <a href="/remove-from-cart/{{this.id}}"><img src="/img/icons/ic_remove.webp" alt="Törlés"></a>
+          </div>
+        </div>
+        {{/each}}
     </div>
   </main>
 </section>

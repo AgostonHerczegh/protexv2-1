@@ -1,31 +1,30 @@
 <header id="header">
   <div class="nav-top">
     <a href="/" class="logo">PROTEX</a>
-
-    {{!--ezt kéne átírni valahogy úgy hogy a search input végig a "search-box"ban legyen 
-    ne pedig csak egy kicsi inputként--}}
     <div class="search-box">
       <form action="#" method="get">
         <div class="inputs">
           <input type="submit" id="submit-search" value="">
-          <input type="text" placeholder="Találd meg kedvenced!" name="search-term">
+          <input type="text" placeholder="Találd meg kedvenced!" name="search-term" id="searchboxtext">
         </div>
       </form>
     </div>
+    
     <div class="actions-items">
       <div class="action-item">
-        <img src="/img/icons/ic_shopping_cart.png" alt="Items in cart">
+        <img src="/img/icons/ic_shopping_cart.png" alt="Kosár">
         <a href="/cart"><span id="items-in-cart"></span>Kosár</a>
       </div>
+
       <div class="action-item">
-        <img src="/img/icons/ic_favorite_border.png" alt="Kívánságlista">
-        <a href="/wishlist">Kívánságlista</a>
+        <img src="/img/icons/ic_orders.png" alt="Rendeléseim">
+        <a href="/orders"><span id="orders"></span>Rendeléseim</a>
       </div>
+
       <div class="action-item">
-        <img src="/img/icons/ic_account_circle.png" alt="Sign In">
+        <img src="/img/icons/ic_account_circle.png" alt="Bejelentkezés">
         {{# if user }}
           <div class="user-session">
-            <p class="username">Helló {{user.username}}!</p>
             <a href="/log-out">Kijelentkezés</a>
           </div>
         {{ else }}

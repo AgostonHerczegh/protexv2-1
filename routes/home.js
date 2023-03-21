@@ -8,14 +8,14 @@ module.exports = (app) => {
 
     categoriesDAO.list()
         .then((result) => categories = result)
-        .catch((err) => warning = 'it was not possible list categories');
+        .catch((err) => warning = 'Nem lehetett betölteni a kategóriákat');
     productsDAO.list(9)
         .then((result) => products = result)
-        .catch((err) => warning = 'it was not possible list products');
+        .catch((err) => warning = 'Nem lehetett betölteni a termékeket');
 
     setTimeout(() => {
       res.status(200).render('home/index', {
-        title: 'Home',
+        title: 'Termékek | Protex',
         categories, products,
         success, warning,
         user: req.session['user'],

@@ -1,3 +1,4 @@
+
 main {
   min-height: 60vh;
 }
@@ -16,7 +17,7 @@ main {
   font-weight: bolder;
   font-size: 24px;
   letter-spacing: 1.25px;
-  color: #4c4c4c;
+  color: #f1f1f1;
   text-decoration: none;
 }
 .msg-div {
@@ -81,4 +82,32 @@ main {
 }
 .dropdown .submenu-dropdown a:hover {
   text-decoration: underline;
+}
+
+
+@media only screen and (max-width: 600px) {
+  main {
+    min-height: auto;
+  }
+  .container {
+    margin: 1.5em auto;
+  }
+  .logo {
+    font-size: 20px;
+  }
+  .msg-div {
+    width: 95vw;
+  }
+  .dropdown .submenu-dropdown {
+    top: 20px;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .msg-div {
+    width: 90vw;
+  }
+  .dropdown .submenu-dropdown {
+    top: 25px;
+  }
 }
