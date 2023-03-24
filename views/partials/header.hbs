@@ -9,7 +9,8 @@
         </div>
       </form>
     </div>
-    
+     {{# if user }}
+
     <div class="actions-items">
       <div class="action-item">
         <img src="/img/icons/ic_shopping_cart.png" alt="Kosár">
@@ -20,6 +21,7 @@
         <img src="/img/icons/ic_orders.png" alt="Rendeléseim">
         <a href="/orders"><span id="orders"></span>Rendeléseim</a>
       </div>
+        {{/if}}
 
       <div class="action-item">
         <img src="/img/icons/ic_account_circle.png" alt="Bejelentkezés">
@@ -28,7 +30,7 @@
             <a href="/log-out">Kijelentkezés</a>
           </div>
           <div class="user-session">
-            <p class="hello">Helló, {{session.username}}</p>
+            <p class="hello">Helló, {{user.username}}</p>
           </div>
         {{ else }}
           <a href="/sign-in">Bejelentkezés</a>

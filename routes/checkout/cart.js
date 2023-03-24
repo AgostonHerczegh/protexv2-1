@@ -16,9 +16,12 @@ module.exports = (app) => {
 
     productsDao.getByIdWithQuantity(productsInCartIds)
         .then((products) => {
+          const total = products.reduce((acc, item) => acc + item.price * item.quantity, 0);
+          console.log(products)
+
           res.render('checkout/cart', {
             title: 'Kosár',
-            success, warning,
+            success, warning,total,
             products,
             user:req.session.user
           });
