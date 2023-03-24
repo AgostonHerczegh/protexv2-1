@@ -1,0 +1,42 @@
+<form class="address-form">
+    <div class="form-group">
+        <label for="address-type">Cím típus kiválasztása</label>
+        <select name="address-type" id="address-type" class="form-control">
+            <option value="new">Új cím hozzáadása</option>
+            <option value="saved">Mentett cím kiválasztása</option>
+        </select>
+    </div>
+    <div class="new-address">
+        <div class="form-group">
+            <label for="name">Név</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Adja meg a cím nevét(pl. Otthon, Munkahely, Suli)">
+        </div>
+        <div class="form-group">
+            <label for="address">Cím</label>
+            <input type="text" name="address" class="form-control" id="address" placeholder="Adja meg a címét">
+        </div>
+        <div class="form-group">
+            <label for="city">Város</label>
+            <input type="text" name="city" class="form-control" id="city" placeholder="Adja meg a város nevét">
+        </div>
+        <div class="form-group">
+            <label for="state">Váregye</label>
+            <input type="text" name="state" class="form-control" id="state" placeholder="Adja meg a vármegye nevét">
+        </div>
+        <div class="form-group">
+            <label for="zip-code">Irányítószám</label>
+            <input type="text" name="zip-code" class="form-control" id="zip-code" placeholder="Adja meg az irányítószámot">
+        </div>
+    </div>
+    <div class="saved-address">
+        <div class="form-group">
+            <label for="select-saved-address">Válassza ki a mentett címet</label>
+            <select name="select-saved-address" id="select-saved-address" class="form-control">
+                <option value="">Elmentett cím 1</option>
+                <option value="">Elmentett cím 2</option>
+                <option value="">Elmentett cím 3</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Tovább</button>
+</form>
