@@ -44,4 +44,11 @@ module.exports = (app) => {
     console.log(req.session.user.cart)
     res.redirect('/');
   });
+
+  app.get('/address', (req, res) => {
+    res.render('checkout/address', {
+      title: 'Cím',
+    });
+  });
+
 };

@@ -40,3 +40,21 @@
     </div>
     <button type="submit" class="btn btn-primary">Tovább</button>
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addressTypeSelect = document.getElementById('address-type');
+        const newAddressDiv = document.querySelector('.new-address');
+        const savedAddressDiv = document.querySelector('.saved-address');
+
+        addressTypeSelect.addEventListener('change', function(event) {
+            if (event.target.value === 'new') {
+                newAddressDiv.style.display = 'block';
+                savedAddressDiv.style.display = 'none';
+            } else if (event.target.value === 'saved') {
+                newAddressDiv.style.display = 'none';
+                savedAddressDiv.style.display = 'block';
+            }
+        });
+    });
+</script>
