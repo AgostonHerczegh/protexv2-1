@@ -33,6 +33,11 @@ class AppController {
     this.app.use(validator());
 
     this.app.engine('hbs', hbs({
+      helpers: {
+        json: function(context) {
+          return JSON.stringify(context);
+        }
+      },
       extname: 'hbs',
       defaultLayout: 'layout',
       layoutsDir: 'views/layouts/',

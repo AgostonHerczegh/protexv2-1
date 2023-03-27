@@ -1,5 +1,31 @@
 <section class="products">
   <aside>
+    <form id="filters-form">
+      <fieldset>
+        <legend>Szűrés</legend>
+        <div class="filter">
+          <label for="category">Kategória</label>
+          <select name="category" id="category">
+            <option value="0">Összes</option>
+            {{#each categories}}
+              <option value="{{this.id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+          <div class="price">
+          <label for="price">Ár</label>
+          <input type="range" name="price-slider" id="price-slider" min="0" max="100000" step="1000">
+          </div>
+          <div class="brand">
+            {{!-
+          <label for="brand">Gyártók</label>
+          <select name="brand" id="brand">
+            <option value="0">Összes</option>
+          </div>
+        </div>
+        -}} 
+        <button type="submit">Mehet!</button>
+      </fieldset>
+    </form>
   </aside>
   <main>
     <nav>
@@ -8,16 +34,6 @@
         <li class="filter"><a href="/order/low-price">Alacsony-Magas ár</a></li>
         <li class="filter"><a href="/order/price">Magas-Alacsony ár</a></li>
       </ul>
-      <div class="display">
-        <div class="vertical-line"></div>
-        <a href="#">
-          <img src="/img/icons/ic_view_grid.png" alt="Display Grid">
-        </a>
-        <div class="vertical-line"></div>
-        <a href="#">
-          <img src="/img/icons/ic_view_list.png" alt="Display Line">
-        </a>
-      </div>
     </nav>
     <div class="products-list">
       {{# each products}}

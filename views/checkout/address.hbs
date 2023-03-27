@@ -1,4 +1,4 @@
-<form class="address-form">
+<form class="address-form" method="post" action="/address">
     <div class="form-group">
         <label for="address-type">Cím típus kiválasztása</label>
         <select name="address-type" id="address-type" class="form-control">
@@ -9,8 +9,20 @@
     <div class="new-address">
         <div class="form-group">
             <label for="name">Név</label>
-            <input type="text" name="name" class="form-control" id="name" placeholder="Adja meg a cím nevét(pl. Otthon, Munkahely, Suli)">
+            <input type="text" name="name" class="form-control" id="name"
+                placeholder="Adja meg a cím nevét(pl. Otthon, Munkahely, Suli)">
         </div>
+        <div class="form-group">
+            <label for="country">Ország</label>
+            <select name="country" id="country">
+                {{#each countries}}
+                <option>{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <input type="hidden" name="id" value="" class="input-sign">
+
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" class="input-sign">
         <div class="form-group">
             <label for="address">Cím</label>
             <input type="text" name="address" class="form-control" id="address" placeholder="Adja meg a címét">
@@ -20,23 +32,98 @@
             <input type="text" name="city" class="form-control" id="city" placeholder="Adja meg a város nevét">
         </div>
         <div class="form-group">
-            <label for="state">Váregye</label>
+            <label for="state">Vármegye</label>
             <input type="text" name="state" class="form-control" id="state" placeholder="Adja meg a vármegye nevét">
         </div>
         <div class="form-group">
             <label for="zip-code">Irányítószám</label>
-            <input type="text" name="zip-code" class="form-control" id="zip-code" placeholder="Adja meg az irányítószámot">
+            <input type="text" name="zip-code" class="form-control" id="zip-code"
+                placeholder="Adja meg az irányítószámot">
         </div>
-    </div>
-    <div class="saved-address">
         <div class="form-group">
-            <label for="select-saved-address">Válassza ki a mentett címet</label>
-            <select name="select-saved-address" id="select-saved-address" class="form-control">
-                <option value="">Elmentett cím 1</option>
-                <option value="">Elmentett cím 2</option>
-                <option value="">Elmentett cím 3</option>
-            </select>
+            <label for="zip-code">Telefonszám</label>
+            <input type="text" name="number" class="form-control" id="number" placeholder="Adja meg a telefonszámot">
         </div>
+        <button type="submit" id="mainButton" class="btn btn-primary">Tovább</button>
+
     </div>
-    <button type="submit" class="btn btn-primary">Tovább</button>
+
 </form>
+<div class="saved-address">
+    <div class="form-group">
+        <label for="select-saved-address">Válassza ki a mentett címet</label>
+        <select name="select-saved-address" id="select-saved-address" class="form-control">
+            {{#each savedPayments}}
+            <option value="{{this.id}}">{{this.address_name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <button type="submit" id="submitButton" class="btn btn-primary">TovábbXD</button>
+</div>
+
+
+<script>
+    const payments = {{{ json savedPayments }}}
+        const selectSavedAddress = document.getElementById('select-saved-address');
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const addressTypeSelect = document.getElementById('address-type');
+        const newAddressDiv = document.querySelector('.new-address');
+        const savedAddressDiv = document.querySelector('.saved-address');
+        addressTypeSelect.addEventListener('change', function (event) {
+            if (event.target.value === 'new') {
+                newAddressDiv.style.display = 'block';
+                savedAddressDiv.style.display = 'none';
+            } else if (event.target.value === 'saved') {
+                newAddressDiv.style.display = 'none';
+                savedAddressDiv.style.display = 'block';
+            }
+            selectSavedAddress.selectedIndex = 0;
+            selectSavedAddress.dispatchEvent(new Event('change'));
+        });
+
+        const idInput = document.querySelector('input[name="id"]');
+
+
+        const nameInput = document.querySelector('input[name="name"]');
+        const addressInput = document.querySelector('input[name="address"]');
+        const cityInput = document.querySelector('input[name="city"]');
+        const stateInput = document.querySelector('input[name="state"]');
+        const zipCodeInput = document.querySelector('input[name="zip-code"]');
+        const numberInput = document.querySelector('input[name="number"]');
+
+        selectSavedAddress.addEventListener('change', function (event) {
+            const selectedPayment = payments.find(payment => payment.id == selectSavedAddress.value);
+            console.log(selectSavedAddress.options[0].value);
+            console.log(selectedPayment)
+            if (selectedPayment) {
+                idInput.value = selectedPayment.id;
+                nameInput.value = selectedPayment.address_name;
+                addressInput.value = selectedPayment.address;
+                cityInput.value = selectedPayment.city;
+                stateInput.value = selectedPayment.region;
+                zipCodeInput.value = selectedPayment.postal;
+                numberInput.value = selectedPayment.tel;
+            }
+
+
+        });
+
+        const submitButton = document.getElementById('submitButton');
+
+        const mainButton = document.getElementById('mainButton');
+
+        submitButton.addEventListener("click", function (event) {
+            console.log(event)
+            mainButton.click();
+        })
+
+
+
+    });
+
+
+
+
+</script>

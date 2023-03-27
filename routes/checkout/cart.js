@@ -1,3 +1,5 @@
+const consign = require("consign");
+
 module.exports = (app) => {
   app.get('/cart', (req, res) => {
     let success; const warning = app.helpers.msg(req);
@@ -44,4 +46,25 @@ module.exports = (app) => {
     console.log(req.session.user.cart)
     res.redirect('/');
   });
+
+  app.get('/address', async(req, res) => {
+    const connection = app.dao.connectionFactory();
+    const userDao = new app.dao.userDAO(connection);
+    const categoriesDAO = new app.dao.categoriesDAO(connection)
+    const savedPayments = await userDao.getPaymentInfo(req.session.user).then((result) => result)
+
+console.log(savedPayments)
+    categoriesDAO.getCountries().then((result) => {
+      const countries=result;
+      res.render('checkout/address', {
+        savedPayments,
+        countries,
+        title: 'Cím',
+        csrfToken: req.csrfToken()
+      });
+
+    });
+ 
+  });
+
 };

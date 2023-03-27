@@ -1,0 +1,43 @@
+<table>
+  <tr>
+    <td>name</td>
+    <td>{{data.name}}</td>
+  </tr>
+  <tr>
+    <td>country</td>
+    <td>{{data.country}}</td>
+  </tr>
+  <tr>
+    <td>address</td>
+    <td>{{data.address}}</td>
+  </tr>
+  <tr>
+    <td>city</td>
+    <td>{{data.city}}</td>
+  </tr>
+  <tr>
+    <td>state</td>
+    <td>{{data.state}}</td>
+  </tr>
+  <tr>
+    <td>zip-code</td>
+    <td>{{data["zip-code"}}</td>
+  </tr>
+  <tr>
+    <td>number</td>
+    <td>{{data.number}}</td>
+  </tr>
+</table>
+<div class="cart-items">
+        {{#each products}}
+        <div class="cart-item">
+          <div >
+            <img src="/img/products/{{this.img_url}}" class="cart-item-img" alt="{{this.name}}"></div>
+          <div class="cart-item-info">
+            <p class="cart-item-name">{{this.name}}</p>
+            <p class="cart-item-price">{{this.price}} Ft</p>
+            <p class="cart-item-quantity">Mennyiség: {{this.quantity}}</p>
+          </div>
+        </div>
+        {{/each}}
+    </div>

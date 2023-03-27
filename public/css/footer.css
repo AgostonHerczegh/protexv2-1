@@ -13,6 +13,7 @@ footer .bottom {
   margin-right: auto;
   padding-top: 2em;
   padding-bottom: 2em;
+  margin-top: 50px;
 }
 
 /* Footer top */
@@ -20,15 +21,11 @@ footer .bottom {
   footer .top .links {
     width: 30%;
   }
-  footer .top .social-links {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
 }
 
 footer .top .links a {
   text-decoration: none;
+  display: inline-block;
   color: #666666;
   font-weight: 600;
   letter-spacing: 1.2px;

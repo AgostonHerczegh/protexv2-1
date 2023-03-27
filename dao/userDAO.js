@@ -50,6 +50,49 @@ class UserDAO {
           });
     });
   }
+
+  async getUserId(email) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('select id from users where email = ?', email,
+          (err, result) => {
+            if (err) return reject(err);
+            return resolve(result[0].id);
+          });
+    });
+  }
+  async getCountryId(country) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('select id from countries where name = ?', country,
+          (err, result) => {
+            if (err) return reject(err);
+            return resolve(result[0].id);
+          });
+    });
+  }
+  async savePaymentInfo(data,req) {
+    console.log(data,req)
+    const userID= await this.getUserId(req.email).then((userId) => userId)
+    const countryID = await this.getCountryId(data.country).then((countryId) => countryId)
+    return new Promise((resolve, reject) => {
+      this.connection
+          .query('INSERT INTO `address`(`user_id`, `address_name`, `city`, `address`, `country_id`, `region`, `postal`, `tel`) VALUES  (?, ?, ?, ?, ?, ?, ?, ?)',
+              [userID, data.name,data.city, data.address, countryID,data.state, data["zip-code"], data.number],
+              (err, result) => {
+                if (err) return reject(err);
+                return resolve('Sikeres rendelés!');
+              });
+    });
+  }
+  async getPaymentInfo(req) {
+    const userID= await this.getUserId(req.email).then((userId) => userId)
+    return new Promise((resolve, reject) => {
+      this.connection.query('select * from address where user_id = ?', userID,
+          (err, result) => {
+            if (err) return reject(err);
+            return resolve(result);
+          });
+    });
+  }
 }
 
 module.exports = () => UserDAO;

@@ -97,6 +97,7 @@ header .search-box select {
   header .action-item {
     flex-direction: column;
     margin-top: 1em;
+    text-decoration: none;
   }
 
   header .search-box {
