@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2023 at 07:23 PM
+-- Generation Time: Mar 28, 2023 at 04:38 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -160,8 +160,8 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `img_url`, `catego
 (2, 'Vegan Protein ízesített növényi fehérje italpor', 'Fantasztikusan finom és krémes, gyorsan oldódó Vegán borsó, rizs és tökfehérje mátrix 19 gramm fehérjetartalommal adagonként, hozzáadott cukor nélkül, két féle ízben.', 3990, 'Pure-Gold-Vegan-Protein-izesitett-novenyi-feherje-italpor-banan.webp', 1, 'VeganProteinBanan'),
 (3, 'Pure Gold Magic Vegan fehérjepor', 'Gyorsan oldódó, minden eddiginél krémesebb Pure Gold Vegán, borsó-, barnarizs-, mandula- és organikus sütőtök fehérje.', 5990, 'magic-vegan_3d.webp', 1, 'PureGoldMagicVegan'),
 (4, '100% WHEY PROTEIN FEHÉRJE 4X1 KG (4 KG)', 'Alkottunk Nektek egy olyan krémes fehérje komplexet, amiben tejsavófehérje koncentrátum van, ami biztosítja az aminosavak teljes spektrumát izmaidnak, nem mellesleg 4 finom ízben is kipróbálhatjátok.\r\n\r\n Ha a napi fehérjebeviteled kiegészítésre szorul, akkor a Builder 100% Whey egy kiváló megoldás lehet számodra, hiszen a finom ízek mellett egy adaggal 20 gramm minőségi fehérjét is nyerünk.', 26990, '16153_fff6a0777aba.webp', 1, '100whey4kg'),
-(20, 'BioCell Collagen® II-es típusú hidrolizált kollagén - NOW Foods', 'A BioCell Collagen® II-es típusú hidrolizált kollagén egyedülálló komplexe támogatja a csont- és izomrendszert és a bőr egészségét. Jól felszívódó, hidrolizált kollagént és kondroitin-szulfátot tartalmaz, ami hozzájárul a porcok és a kötőszövet egészségének fenntartásához. A termékben hialuronsav is található a fiatalos és rugalmas bőr megőrzésére. A készítmény remek választás mindenkinek, aki problémamentes mozgásra vágyik, és tenni akar a jó megjelenésért.', 12690, '3008_mainimage_2.webp', 2, 'biocell-collagenr-ii-es-tipusu-hidrolizalt-kollagen-now-foods'),
-(21, 'Colla Pink - BeastPink\r\n', 'A Colla Pink egy szépségital minden nő számára, aki szeretne megfelelő gondot fordítani a megjelenésére, a mozgásszervi rendszerére és az általános szépségére. Ennek a komplex tápálékkiegészítőnek a fő összetevői a kollagén peptidek, amelyeket hialuronsav, szőlőmagkivonat, valamint válogatott vitaminok és ásványi anyagok kombinációja egészít ki. Ébreszd fel a szépségedet és nőies önbizalmadat ennek a finom italnak köszönhetően.', 5690, 'colla_pink_jahoda.webp', 2, 'colla-pink-beastpink');
+(25, 'BioCell Collagen® II-es típusú hidrolizált kollagén - NOW Foods', 'A BioCell Collagen® II-es típusú hidrolizált kollagén egyedülálló komplexe támogatja a csont- és izomrendszert és a bőr egészségét. Jól felszívódó, hidrolizált kollagént és kondroitin-szulfátot tartalmaz, ami hozzájárul a porcok és a kötőszövet egészségének fenntartásához. A termékben hialuronsav is található a fiatalos és rugalmas bőr megőrzésére. A készítmény remek választás mindenkinek, aki problémamentes mozgásra vágyik, és tenni akar a jó megjelenésért.', 12690, '3008_mainimage_2.webp', 2, 'biocell-collagenr-ii-es-tipusu-hidrolizalt-kollagen-now-foods'),
+(26, 'Colla Pink - BeastPink', 'A Colla Pink egy szépségital minden nő számára, aki szeretne megfelelő gondot fordítani a megjelenésére, a mozgásszervi rendszerére és az általános szépségére. Ennek a komplex tápálékkiegészítőnek a fő összetevői a kollagén peptidek, amelyeket hialuronsav, szőlőmagkivonat, valamint válogatott vitaminok és ásványi anyagok kombinációja egészít ki. Ébreszd fel a szépségedet és nőies önbizalmadat ennek a finom italnak köszönhetően.', 5690, 'colla_pink_jahoda.webp', 2, 'colla-pink-beastpink');
 
 -- --------------------------------------------------------
 
@@ -196,6 +196,27 @@ INSERT INTO `product_categories` (`idcategory`, `category_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `stock`
+--
+
+CREATE TABLE `stock` (
+  `product_id` int(11) NOT NULL,
+  `db` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Dumping data for table `stock`
+--
+
+INSERT INTO `stock` (`product_id`, `db`) VALUES
+(1, 26),
+(2, 31),
+(3, 0),
+(4, 8);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -212,7 +233,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `user_type`) VALUES
-(14, 'kutya', 'kutya@kutya.com', '$2a$10$urBEtBeYcp3NyiBE58DRYOUZbesj61DAaAQ1ESOqy0UK8K25DHH2i', 'USER'),
+(14, 'kutya', 'kutya@kutya.com', '$2a$10$urBEtBeYcp3NyiBE58DRYOUZbesj61DAaAQ1ESOqy0UK8K25DHH2i', 'ADMIN'),
 (15, 'user', 'user@gmail.com', '$2a$10$YUkc5BU2iKvXwMUODCZRf.da.vBrmYbJ3sx8sWgsKvzDQOQCgDrTa', 'USER'),
 (16, 'teszt', 'teszt@teszt.com', '$2a$10$VIOcS.C4GhhjlwJHOXJfM.9wqkcGK4HWzfVLk0BvsvZWNzpfhGh.e', 'USER'),
 (17, 'admin', 'admin@admin.com', '$2a$10$AOtIrNpLNcFvvIrWWhIZhO9Fdq5EEJGd0g.dxS5gMefDMCgYvLZR2', 'ADMIN');
@@ -264,6 +285,12 @@ ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`idcategory`);
 
 --
+-- Indexes for table `stock`
+--
+ALTER TABLE `stock`
+  ADD PRIMARY KEY (`product_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -297,7 +324,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `product_categories`
@@ -340,6 +367,12 @@ ALTER TABLE `order_items`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category`) REFERENCES `product_categories` (`idcategory`);
+
+--
+-- Constraints for table `stock`
+--
+ALTER TABLE `stock`
+  ADD CONSTRAINT `stock_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
