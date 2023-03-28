@@ -2,26 +2,26 @@ class categoriesDAO {
   constructor(connection) {
     this.connection = connection;
   }
-  list(limit=null) {
+  list(limit = null) {
     return new Promise((resolve, reject) => {
       if (limit) {
         this.connection
-            .query('select * from product_categories limit ?', limit,
-                (err, result) => {
-                  if (err) return reject(err);
-                  return resolve(result);
-                });
+          .query('select * from product_categories limit ?', limit,
+            (err, result) => {
+              if (err) return reject(err);
+              return resolve(result);
+            });
       }
       this.connection
-          .query('select * from product_categories',
-              (err, result) => {
-                if (err) return reject(err);
-                return resolve(result);
-              });
+        .query('select * from product_categories',
+          (err, result) => {
+            if (err) return reject(err);
+            return resolve(result);
+          });
     });
   }
 
-  getCountries(){
+  getCountries() {
     return new Promise((resolve, reject) => {
       this.connection.query('select * from countries', (err, result) => {
         console.log(result)
