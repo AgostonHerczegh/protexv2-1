@@ -1,33 +1,37 @@
-<table>
-  <tr>
-    <td>name</td>
-    <td>{{data.name}}</td>
-  </tr>
-  <tr>
-    <td>country</td>
-    <td>{{data.country}}</td>
-  </tr>
-  <tr>
-    <td>address</td>
-    <td>{{data.address}}</td>
-  </tr>
-  <tr>
-    <td>city</td>
-    <td>{{data.city}}</td>
-  </tr>
-  <tr>
-    <td>state</td>
-    <td>{{data.state}}</td>
-  </tr>
-  <tr>
-    <td>zip-code</td>
-    <td>{{data.zip-code}}</td>
-  </tr>
-  <tr>
-    <td>number</td>
-    <td>{{data.number}}</td>
-  </tr>
-</table>
+<script src="./payment.js"></script>
+<div class="container">
+  <table class="checkout-table">
+    <h1>Az ön által megadott adatok:</h1>
+    <tr>
+      <td class="checkout-label">Név:</td>
+      <td class="checkout-value">{{data.name}}</td>
+    </tr>
+    <tr>
+      <td class="checkout-label">Ország:</td>
+      <td class="checkout-value">{{data.country}}</td>
+    </tr>
+    <tr>
+      <td class="checkout-label">Cím:</td>
+      <td class="checkout-value">{{data.address}}</td>
+    </tr>
+    <tr>
+      <td class="checkout-label">Város:</td>
+      <td class="checkout-value">{{data.city}}</td>
+    </tr>
+    <tr>
+      <td class="checkout-label">Megye:</td>
+      <td class="checkout-value">{{data.state}}</td>
+    </tr>
+    <tr>
+      <td class="checkout-label">Irányítószám:</td>
+      <td class="checkout-value">{{data.zip-code}}</td>
+    </tr>
+    <tr>
+      <td class="checkout-label">Telefonszám:</td>
+      <td class="checkout-value">{{data.number}}</td>
+    </tr>
+  </table>
+</div>
 <div class="cart-items">
   {{#each products}}
   <div class="cart-item">
@@ -42,3 +46,34 @@
   </div>
   {{/each}}
 </div>
+<div class="display-flex">
+  <div class="checkout-box">
+    <div class="total-checkout">
+      <p class="total-price">Összesen: {{total}} Ft</p>
+    </div>
+    <form method="POST" action="/checkout/success">
+      <div class="payment-methods">
+        <label>
+          <input type="hidden" name="_csrf" value="{{csrfToken}}" class="input-sign">
+          <input type="radio" name="payment" value="credit-card">
+          <span class="payment-method">
+            <span class="payment-icon">
+              <i class="far fa-credit-card"></i>
+            </span>
+            <span class="payment-name">Előreutalás bankkártyával</span>
+          </span>
+        </label>
+        <label class="payment-method-option">
+          <input type="radio" name="payment" value="cash">
+          <span class="payment-method">
+            <span class="payment-icon">
+              <i class="fas fa-money-bill-wave"></i>
+            </span>
+            <span class="payment-name">Fizetés átvételkor (+400Ft)</span>
+          </span>
+        </label>
+        <button class="btn-primary" id="payment-Btn">Rendelés leadása</button>
+      </div>
+  </div>
+</div>
+</form>

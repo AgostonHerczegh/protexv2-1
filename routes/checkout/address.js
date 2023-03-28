@@ -3,8 +3,8 @@ module.exports = (app) => {
   app.post('/address', (req, res) => {
     const connection = app.dao.connectionFactory();
     const productsDao = new app.dao.productsDAO(connection);
-   
-  console.log(req.body)
+
+    console.log(req.body)
     // if (req.body.id==undefined) {
     //   UserDAO.savePaymentInfo(req.body, req.session.user)
     // }
@@ -36,4 +36,5 @@ module.exports = (app) => {
 
   }
   )
+
 };
