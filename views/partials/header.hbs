@@ -9,7 +9,7 @@
         </div>
       </form>
     </div>
-     {{# if user }}
+    {{# if user }}
 
     <div class="actions-items">
       <div class="action-item">
@@ -21,37 +21,31 @@
         <img src="/img/icons/ic_orders.png" alt="Rendeléseim">
         <a href="/orders"><span id="orders"></span>Rendeléseim</a>
       </div>
-        {{/if}}
+      {{/if}}
 
       <div class="action-item">
         <img src="/img/icons/ic_account_circle.png" alt="Bejelentkezés">
         {{# if user }}
-          <div class="user-session">
-            <a href="/profile">Profilom</a>
-          </div>
-          {{#if user.admin}}
-          <div class="user-session">
-            <a href="/admin">Admin</a>
-          </div>
-          {{/if}}
-          <div class="user-session">
-            <a href="/log-out">Kijelentkezés</a>
-          </div>
-          <div class="user-session">
-            <p class="hello">Helló, {{user.username}}</p>
-          </div>
+        <div class="user-session">
+          <a href="/profile">Profilom</a>
+        </div>
+        {{#if user.admin}}
+        <div class="user-session">
+          <a href="/admin">Admin</a>
+        </div>
+        {{/if}}
+        <div class="user-session">
+          <a href="/log-out">Kijelentkezés</a>
+        </div>
+        <div class="user-session">
+          <p class="hello">Helló, {{user.username}}</p>
+        </div>
         {{ else }}
-          <a href="/sign-in">Bejelentkezés</a>
+        <a href="/sign-in">Bejelentkezés</a>
         {{/if}}
       </div>
     </div>
-
-    <div class="action-item">
-     <div id="admin-panel" style="display: none;">
-    <!-- Admin panel content here... -->
-    </div>
-    </div>
   </div>
   <div class="line-div"></div>
-  
+
 </header>

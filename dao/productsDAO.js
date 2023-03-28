@@ -100,6 +100,16 @@ class productsDAO {
         });
     });
   }
+
+  getCategory(category) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('SELECT `idcategory`, `category_name` FROM `product_categories` WHERE `category_name` = ?', [category],
+        (err, result) => {
+          if (err) return reject(err);
+          return resolve(result);
+        });
+    });
+  }
 }
 
 
