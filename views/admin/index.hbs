@@ -1,0 +1,108 @@
+<head>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<table class="products-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each products}}
+        <tr class="product-row">
+            <td>{{this.name}}</td>
+            <td>{{this.price}}ft</td>
+            <td>
+                <a href="/admin/delete-item/{{this.id}}" class="delete">X</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<br>
+<br>
+<div class="add-form-container">
+    <h1 class="addh1">Termék hozzáadása:</h1>
+    <form action="/admin/add-item" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" class="input-sign">
+        <input type="text" name="name" placeholder="name" />
+        <input type="text" name="desc" placeholder="desc" />
+        <input type="text" name="product_url" placeholder="product_url" />
+        <input type="number" name="price" placeholder="price" />
+        <input type="number" name="category" placeholder="category" />
+
+        <input type="file" name="image">
+        <input type="submit" value="Hozzáadás" />
+    </form>
+</div>
+<table class="categorytable">
+
+    <thead>
+        <tr>
+            <th>Kategória ID</th>
+            <th>Kategória neve</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>feherje</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>kollagen</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>amino</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>kreatin</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>vitamin</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>testsulymgt</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>edzeselotti</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>tomegnovelo</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>etelsnack</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>tesztoszteron</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>probacsomag</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>ruha</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>egyeb</td>
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>osszes</td>
+        </tr>
+    </tbody>
+</table>
+</div>

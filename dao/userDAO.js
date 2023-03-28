@@ -41,12 +41,12 @@ class UserDAO {
           });
     });
   }
-  getUsername(email) {
+  getUser(email) {
     return new Promise((resolve, reject) => {
-      this.connection.query('select username from users where email = ?', email,
+      this.connection.query('select * from users where email = ?', email,
           (err, result) => {
             if (err) return reject(err);
-            return resolve(result[0].username);
+            return resolve(result[0]);
           });
     });
   }

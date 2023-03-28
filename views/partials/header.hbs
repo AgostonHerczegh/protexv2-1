@@ -29,9 +29,11 @@
           <div class="user-session">
             <a href="/profile">Profilom</a>
           </div>
+          {{#if user.admin}}
           <div class="user-session">
             <a href="/admin">Admin</a>
           </div>
+          {{/if}}
           <div class="user-session">
             <a href="/log-out">Kijelentkezés</a>
           </div>

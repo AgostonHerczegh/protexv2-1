@@ -8,6 +8,8 @@ const session = require('express-session');
 const csrf = require('csurf');
 const validator = require('express-validator');
 const cors = require('cors');
+const multer = require('multer');
+
 
 class AppController {
   constructor() {
@@ -19,22 +21,31 @@ class AppController {
   }
 
   middlewares() {
+    const storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, 'public/img/products') // replace 'uploads/' with the path to your desired folder
+      },
+      filename: function (req, file, cb) {
+        cb(null, file.originalname)
+      }
+    });
 
-    this.app.use(bodyParser.urlencoded( {extended: true} ));
+    this.app.use(multer({ storage: storage }).single('image'));
+    this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
     this.app.use(cookieParser());
-    this.app.use(session( {
+    this.app.use(session({
       secret: 'secretpasscryp',
       resave: false,
       saveUninitialized: true,
     }));
     this.app.use(cors())
-    this.app.use(csrf({cookie: true}));
+    this.app.use(csrf({ cookie: true }));
     this.app.use(validator());
 
     this.app.engine('hbs', hbs({
       helpers: {
-        json: function(context) {
+        json: function (context) {
           return JSON.stringify(context);
         }
       },
@@ -52,15 +63,15 @@ class AppController {
     this.app.use(express.static(path.join(__dirname, '../public')));
 
     consign()
-        .include('routes')
-        .then('dao')
-        .then('helpers')
-        .into(this.app);
+      .include('routes')
+      .then('dao')
+      .then('helpers')
+      .into(this.app);
   }
   errors() {
     this.app.use((req, res, next) => {
       return res.status(404)
-          .render('errors/404', {title: 'Az oldal nem található :(  404'});
+        .render('errors/404', { title: 'Az oldal nem található :(  404' });
     });
     // this.app.use((erros, req, res, next) => {
     //   return res.status(500)

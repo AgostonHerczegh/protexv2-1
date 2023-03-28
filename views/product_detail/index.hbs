@@ -205,20 +205,12 @@
         <img src="/img/products/{{product.img_url}}" alt="Product Image">
       </div>
       <div class="product-details">
-        <div class="product-title">{{product.name}}</div><br>
-        <div class="stock-status">
-              {{#if in_stock}}
-              <div class="in-stock">Készleten</div>
-              {{else}}
-              <div class="out-of-stock">*Nincs implementálva a raktár</div>
-              {{/if}}
-            </div><br><br>
+        <div class="product-title">{{product.name}}</div><br><br>
         <div class="product-description">{{product.description}}</div><br><br>
         <div class="product-price">{{product.price}}Ft</div><br><br>
         <a href="/add-to-cart/{{product.id}}">
           <div class="white-button">Vásárlás</div>
         </a>
-      </div>
     </div>
   </div>
   <div class="suggested-products">

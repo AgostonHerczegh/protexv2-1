@@ -4,7 +4,7 @@ module.exports = (app) => {
 
     if (req.session['user'] || req.session['user'] != null) {
       req.session['warning'] = 'Nincs engedélye megtekinteni ezt az oldalt!';
-      return res.redirect('/');
+      return res.redirect('/home');
     }
 
     res.render('sign/in', {
@@ -32,16 +32,17 @@ module.exports = (app) => {
 
     userDao.login(email, password)
         .then((result) => {
-          userDao.getUsername(email).then((username) => {
-            req.session['success'] = result;
 
+          userDao.getUser(email).then((user) => {
+            console.log(user)
+            req.session['success'] = result;
             req.session['user'] = {
-              username: username,
+              username: user.username,
               email: email,
-              admin: true,
+              admin: user.user_type == "ADMIN" ? true : false,
               cart: [],
             };
-  
+            console.log(req.session['user']);
             res.redirect('/');
 
           });

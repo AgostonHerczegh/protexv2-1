@@ -14,8 +14,9 @@
   border-radius: 4px;
   background-color: #fff;
   height: 260px;
-  box-shadow: 4px 2px 8px rgba(0,0,0,.05);
+  box-shadow: 4px 2px 8px rgba(0, 0, 0, .05);
 }
+
 .products aside .promo-code .texts {
   position: absolute;
   text-align: center;
@@ -23,13 +24,16 @@
   top: 50%;
   left: 50%;
 }
+
 .products aside .promo-code .texts .title {
   margin-bottom: 2em;
   color: #666666;
 }
+
 .products aside .promo-code .texts .desc {
   color: #d1d1d1;
 }
+
 /* Nav Products */
 .products main nav {
   height: 50px;
@@ -37,8 +41,9 @@
   justify-content: space-between;
   background-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 4px 2px 8px rgba(0,0,0,.05);
+  box-shadow: 4px 2px 8px rgba(0, 0, 0, .05);
 }
+
 .products main nav .filters {
   display: flex;
   align-items: center;
@@ -46,31 +51,37 @@
   width: 80%;
   margin-left: 25px;
 }
+
 .products main nav .filters .filter a {
   text-decoration: none;
   color: #b3b3b3;
   font-size: 14px;
   font-weight: 600;
 }
+
 .products main nav .filters .filter-selected a {
   color: #1875f0;
   border-bottom: 3px solid #1875f0;
   padding-bottom: 15px;
 }
+
 .products main nav .display {
   display: flex;
   align-items: center;
 }
+
 .products main nav .display a {
   margin-left: 8px;
   margin-right: 8px;
 }
+
 /* Products */
 .products main .products-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 .products main .products-list .product {
   display: flex;
   flex-direction: column;
@@ -80,8 +91,9 @@
   margin-top: 1.5em;
   background-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 4px 2px 8px rgba(0,0,0,.05);
+  box-shadow: 4px 2px 8px rgba(0, 0, 0, .05);
 }
+
 .products main .products-list .product .labels {
   display: flex;
   justify-content: space-between;
@@ -89,6 +101,7 @@
   margin-top: 1em;
   margin-bottom: 1em;
 }
+
 .products main .products-list .product .labels .promotion {
   font-size: 11px;
   text-transform: uppercase;
@@ -100,23 +113,28 @@
   padding: .7em 1.2em;
   font-weight: 700;
 }
+
 .products main .products-list .product .labels .actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-right: 25px;
 }
+
 .products main .products-list .product .labels .actions .add-list {
   margin-right: 20px;
 }
+
 .products main .products-list .product .labels .actions img {
   width: 19px;
   height: 18px;
 }
+
 .products main .products-list .product .product-img {
   width: 157px;
   height: 160px;
 }
+
 .products main .products-list .product .name {
   width: 75%;
   text-align: center;
@@ -129,16 +147,19 @@
   margin-bottom: 1.2em;
   margin-top: 1.5em;
 }
+
 .products main .products-list .product .price {
   display: flex;
   align-items: center;
   margin-top: 1.2em;
   margin-bottom: 1.5em;
 }
+
 .products main .products-list .product .price .price-value {
   color: #666666;
   font-weight: 900;
 }
+
 .products main .products-list .product .price img {
   width: 18px;
   height: 18px;
@@ -167,14 +188,16 @@
   border-color: #999999;
   color: #111111;
 }
-a{
+
+a {
   text-decoration: none;
 }
+
 /* Cart */
 .cart-item {
   background-color: #f8f8f8;
   border-radius: 5px;
-  box-shadow: 4px 2px 8px rgba(0,0,0,.05);
+  box-shadow: 4px 2px 8px rgba(0, 0, 0, .05);
   display: flex;
   justify-content: space-between;
   margin-top: 2.5em;
@@ -219,6 +242,7 @@ a{
   height: auto;
   width: 30px;
 }
+
 .cart-total {
   display: flex;
   justify-content: flex-end;
@@ -231,6 +255,7 @@ a{
 .cart-total-price {
   margin-right: 1rem;
 }
+
 .cart-checkout-button {
   font-size: 1.2rem;
   font-weight: bold;
@@ -246,12 +271,13 @@ a{
 .cart-checkout-button:hover {
   background-color: rgb(162, 255, 159);
   color: #000;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
+
 .cart-checkout-button:active {
   background-color: #0a8843;
   color: #fff;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Cím megadása form */
@@ -282,9 +308,6 @@ a{
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 16px;
-}
-
-.saved-address {
 }
 
 #address-type {
@@ -322,7 +345,7 @@ a{
   .address-form {
     width: 90%;
   }
-  
+
   .btn-primary {
     width: 70%;
   }
@@ -333,11 +356,11 @@ a{
     width: 100%;
     padding: 0 10px;
   }
-  
+
   .form-control {
     font-size: 14px;
   }
-  
+
   .btn-primary {
     width: 100%;
   }
