@@ -17,45 +17,58 @@ module.exports = (app) => {
     }
 
     productsDao.getByIdWithQuantity(productsInCartIds)
-        .then((products) => {
-          const total = products.reduce((acc, item) => acc + item.price * item.quantity, 0);
-          console.log(products)
+      .then((products) => {
+        const total = products.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        console.log(products)
 
-          res.render('checkout/cart', {
-            title: 'Kosár',
-            success, warning,total,
-            products,
-            user:req.session.user
-          });
-        })
-        .catch((err) => console.log(err));
+        res.render('checkout/cart', {
+          title: 'Kosár',
+          success, warning, total,
+          products,
+          user: req.session.user
+        });
+      })
+      .catch((err) => console.log(err));
   });
-
-
-  app.get('/add-to-cart/:id', (req, res,next) => {
-    
+  app.get('/remove-from-cart/:id', (req, res, next) => {
     const cart = req.session.user.cart
     const product = cart.find(item => item.id === req.params.id)
-    if(product){
-        product.quantity+=1
-    }else{
-        const productId = {id:req.params.id,quantity:1}
-        cart.push(productId)
+    if (product) {
+      product.quantity -= 1
+      if (product.quantity == 0) {
+        const index = cart.indexOf(product)
+        cart.splice(index, 1)
+      }
     }
-    req.session.user.cart=cart;
+    req.session.user.cart = cart;
+    console.log(req.session.user.cart)
+    res.redirect('/cart');
+  })
+
+  app.get('/add-to-cart/:id', (req, res, next) => {
+
+    const cart = req.session.user.cart
+    const product = cart.find(item => item.id === req.params.id)
+    if (product) {
+      product.quantity += 1
+    } else {
+      const productId = { id: req.params.id, quantity: 1 }
+      cart.push(productId)
+    }
+    req.session.user.cart = cart;
     console.log(req.session.user.cart)
     res.redirect('/');
   });
 
-  app.get('/address', async(req, res) => {
+  app.get('/address', async (req, res) => {
     const connection = app.dao.connectionFactory();
     const userDao = new app.dao.userDAO(connection);
     const categoriesDAO = new app.dao.categoriesDAO(connection)
     const savedPayments = await userDao.getPaymentInfo(req.session.user).then((result) => result)
 
-console.log(savedPayments)
+    console.log(savedPayments)
     categoriesDAO.getCountries().then((result) => {
-      const countries=result;
+      const countries = result;
       res.render('checkout/address', {
         savedPayments,
         countries,
@@ -64,7 +77,7 @@ console.log(savedPayments)
       });
 
     });
- 
+
   });
 
 };

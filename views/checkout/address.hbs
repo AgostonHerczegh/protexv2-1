@@ -16,7 +16,7 @@
             <label for="country">Ország</label>
             <select name="country" id="country">
                 {{#each countries}}
-                <option>{{this.name}}</option>
+                <option value="{{this.name}}">{{this.name}}</option>
                 {{/each}}
             </select>
         </div>
@@ -91,12 +91,14 @@
         const stateInput = document.querySelector('input[name="state"]');
         const zipCodeInput = document.querySelector('input[name="zip-code"]');
         const numberInput = document.querySelector('input[name="number"]');
+        const countrySelect = document.querySelector('select[name="country"]');
 
         selectSavedAddress.addEventListener('change', function (event) {
             const selectedPayment = payments.find(payment => payment.id == selectSavedAddress.value);
             console.log(selectSavedAddress.options[0].value);
             console.log(selectedPayment)
             if (selectedPayment) {
+                countrySelect.selectedIndex = selectedPayment.country_id - 1;
                 idInput.value = selectedPayment.id;
                 nameInput.value = selectedPayment.address_name;
                 addressInput.value = selectedPayment.address;

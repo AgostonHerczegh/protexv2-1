@@ -1,0 +1,14 @@
+{{#each orders}}
+{{#if_eq status "pending"}}
+<div>Folyamatban</div>
+{{/if_eq}}
+{{#if_eq status "completed"}}
+<div>Kész</div>
+{{/if_eq}}
+
+{{#if_eq status "cancelled"}}
+
+<div>Törölve</div>
+{{/if_eq}}
+
+{{/each}}

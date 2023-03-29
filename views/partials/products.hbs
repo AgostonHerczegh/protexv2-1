@@ -1,18 +1,18 @@
 <section class="products">
   <aside>
-    <form id="filters-form" action="/" method="get"></form>
-    <fieldset>
-      <legend>Szűrés</legend>
-      <div class="filter">
-        <label for="category">Kategória</label>
-        <select name="category_name" id=" category">
-          {{#each categories}}
-          <option>{{this.category_name}}</option>
-          {{/each}}
-        </select>
-      </div>
-      <button type=" submit">Mehet!</button>
-    </fieldset>
+    <form id="filters-form" action="/" method="get">
+      <fieldset>
+        <legend>Szűrés</legend>
+        <div class="filter">
+          <label for="category">Kategória</label>
+          <select name="category" id="category">
+            {{#each categories}}
+            <option value="{{this.idcategory}}">{{this.category_name}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <button type=" submit">Mehet!</button>
+      </fieldset>
     </form>
   </aside>
   <main>
@@ -31,11 +31,23 @@
         <a href="/product-detail/{{this.product_url}}">
           <p class="name">{{this.name}}</p>
         </a>
+        <p class="price-stock">
+          {{#if (gt this.db 0)}}
+          <span class="stock" style="color:green">Készleten</span>
+          {{else}}
+          <span class="stock" style="color:red">Nincs készleten</span>
+          {{/if}}
+
+        </p>
+
         <div class="price">
           <p class="price-value">{{this.price}} Ft</p>
         </div>
+        {{#if (gt this.db 0)}}
+
         <a href="/add-to-cart/{{this.id}}">
           <div class="white-button">Vásárlás</div>
+          {{/if}}
         </a>
         <br>
       </form>
@@ -43,3 +55,7 @@
     </div>
   </main>
 </section>
+
+<script>
+
+</script>

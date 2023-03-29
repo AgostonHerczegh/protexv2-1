@@ -47,13 +47,14 @@
   {{/each}}
 </div>
 <div class="display-flex">
-  <div class="checkout-box">
-    <div class="total-checkout">
-      <p class="total-price">Összesen: {{total}} Ft</p>
-    </div>
-    <form method="POST" action="/checkout/success">
+  <form method="get" action="/saveorder">
+    <div class="checkout-box">
+      <div class="total-checkout">
+        <p class="total-price">Összesen: {{total}}Ft</p>
+      </div>
       <div class="payment-methods">
         <label>
+          <input type="hidden" name="address_id" value="{{data.id}}" class="input-sign">
           <input type="hidden" name="_csrf" value="{{csrfToken}}" class="input-sign">
           <input type="radio" name="payment" value="credit-card">
           <span class="payment-method">
@@ -72,8 +73,39 @@
             <span class="payment-name">Fizetés átvételkor (+400Ft)</span>
           </span>
         </label>
-        <button class="btn-primary" id="payment-Btn">Rendelés leadása</button>
       </div>
-  </div>
+    </div>
+    <button class="btn-primary" id="payment-Btn" disabled>Rendelés leadása</button>
+  </form>
 </div>
 </form>
+
+<script>
+
+  // Get all the radio buttons on the page
+  const radios = document.querySelectorAll('input[type="radio"]');
+  // Get the submit button
+  const submitBtn = document.getElementById('payment-Btn');
+
+
+
+  // Loop through all the radio buttons
+  radios.forEach(radio => {
+    // Add a change event listener to each radio button
+    radio.addEventListener('change', () => {
+      console.log("changed")
+
+      // When a radio button is changed, enable the submit button
+      submitBtn.disabled = false;
+
+      if (radio.value === "cash") {
+        submitBtn.innerHTML = "Rendelés leadása (+400Ft)";
+        isCash = true;
+      } else {
+        submitBtn.innerHTML = "Rendelés leadása";
+        isCash = false;
+      }
+    });
+
+  });
+</script>

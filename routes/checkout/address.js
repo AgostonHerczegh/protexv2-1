@@ -1,17 +1,18 @@
 
+
 module.exports = (app) => {
   app.post('/address', (req, res) => {
     const connection = app.dao.connectionFactory();
     const productsDao = new app.dao.productsDAO(connection);
+    const userDao = new app.dao.userDAO(connection);
 
-    console.log(req.body)
-    // if (req.body.id==undefined) {
-    //   UserDAO.savePaymentInfo(req.body, req.session.user)
-    // }
+    console.log(req.body.id)
+    if (req.body.id == "") {
+      userDao.savePaymentInfo(req.body, req.session.user)
+    }
 
     // Terméklista ID-k a kosárban
     const productsInCartIds = req.session.user.cart
-    console.log(productsInCartIds)
     if (productsInCartIds.length == 0) {
       res.render('checkout/cart', {
         title: 'Kosár',
@@ -23,18 +24,39 @@ module.exports = (app) => {
       .then((products) => {
         const total = products.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
+
         res.render('checkout/payment', {
           data: req.body,
-          total,
+          total: total,
           products,
           user: req.session.user,
           csrfToken: req.csrfToken()
 
-        });
+        })
       })
       .catch((err) => console.log(err));
 
   }
   )
+  app.get("/saveOrder", async (req, res) => {
+    const connection = app.dao.connectionFactory();
+
+    const userDao = new app.dao.userDAO(connection);
+    const productsDao = new app.dao.productsDAO(connection);
+    const latestId = await productsDao.getLatestId();
+    const userID = await userDao.getUserId(req.session.user.email);
+    const address_id = req.query.address_id;
+    const payment_method = req.query.payment;
+
+    await productsDao.saveOrder(userID, (latestId[0].id + 1), address_id, payment_method == "cash" ? "CASH" : "CARD")
+
+    const cart = req.session.user.cart;
+
+    cart.forEach(async (item) => {
+      await productsDao.saveOrderItem(userID, (latestId[0].id + 1), item)
+    });
+    req.session.user.cart = [];
+    res.redirect('/');
+  })
 
 };

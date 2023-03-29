@@ -47,6 +47,17 @@ class AppController {
       helpers: {
         json: function (context) {
           return JSON.stringify(context);
+        },
+        if_eq: function (a, b, opts) {
+          if (a == b) {
+            return opts.fn(this);
+          } else {
+            return opts.inverse(this);
+          }
+        },
+        //if bigger than
+        gt: function (a, b) {
+          return (a > b);
         }
       },
       extname: 'hbs',

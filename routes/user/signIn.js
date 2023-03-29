@@ -20,7 +20,7 @@ module.exports = (app) => {
 
     req.checkBody('email', 'Érvényes email-t adjon meg!').notEmpty().isEmail();
     req.checkBody('password', 'Minimum 4 karakteres jelszavat adjon meg!')
-        .notEmpty().isLength({min: 4});
+      .notEmpty().isLength({ min: 4 });
     const errorsInValidation = req.validationErrors();
     if (errorsInValidation) {
       req.session['warning'] = errorsInValidation[0].msg;
@@ -31,25 +31,24 @@ module.exports = (app) => {
     const userDao = new app.dao.userDAO(connection);
 
     userDao.login(email, password)
-        .then((result) => {
+      .then((result) => {
 
-          userDao.getUser(email).then((user) => {
-            console.log(user)
-            req.session['success'] = result;
-            req.session['user'] = {
-              username: user.username,
-              email: email,
-              admin: user.user_type == "ADMIN" ? true : false,
-              cart: [],
-            };
-            console.log(req.session['user']);
-            res.redirect('/');
+        userDao.getUser(email).then((user) => {
+          req.session['success'] = result;
+          req.session['user'] = {
+            username: user.username,
+            email: email,
+            admin: user.user_type == "ADMIN" ? true : false,
+            cart: [],
+          };
+          console.log(req.session['user']);
+          res.redirect('/');
 
-          });
-        })
-        .catch((err) => {
-          req.session['warning'] = err;
-          res.redirect('/sign-in');
         });
+      })
+      .catch((err) => {
+        req.session['warning'] = err;
+        res.redirect('/sign-in');
+      });
   });
 };

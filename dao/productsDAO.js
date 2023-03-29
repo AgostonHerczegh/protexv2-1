@@ -2,21 +2,19 @@ class productsDAO {
   constructor(connection) {
     this.connection = connection;
   }
-  list(limit = null) {
+  list(searchTerm = null) {
     return new Promise((resolve, reject) => {
-      if (limit) {
+      if (searchTerm) {
         this.connection
-          .query('select * from products LIMIT ?', limit,
+          .query(`SELECT * FROM products INNER JOIN stock on stock.product_id=products.id WHERE name LIKE "%${searchTerm}%"`,
             (err, result) => {
               if (err) return reject(err);
               return resolve(result);
             }
           );
-      }
-      // End Queries for limits
-      else {
+      } else {
         this.connection
-          .query('select * from products',
+          .query('SELECT * FROM products INNER JOIN stock on stock.product_id=products.id',
             (err, result) => {
               if (err) return reject(err);
               return resolve(result);
@@ -41,9 +39,13 @@ class productsDAO {
         });
     });
   }
-  filteredList(filter) {
+  async listByCategory(idcategory) {
     return new Promise((resolve, reject) => {
-
+      this.connection.query(`SELECT * FROM products WHERE category = ${idcategory}`,
+        (err, result) => {
+          if (err) return reject(err);
+          return resolve(result);
+        });
     });
   }
 
@@ -110,7 +112,58 @@ class productsDAO {
         });
     });
   }
+
+  async getLatestId() {
+    return new Promise((resolve, reject) => {
+      this.connection.query('SELECT id FROM `orders` ORDER By id DESC LIMIT 1;',
+        (err, result) => {
+          if (err) return reject(err);
+          return resolve(result);
+        });
+    });
+  }
+
+  async saveOrder(userID, order_id, address_id, payment) {
+    return new Promise((resolve, reject) => {
+      this.connection.query(
+        "INSERT INTO `orders`(`id`, `user_id`, `order_time`,`address_id`,`payment_type`) VALUES (?,?,NOW(),?,?)",
+        [order_id, userID, address_id, payment],
+        (err, result) => {
+          if (err) {
+            return reject(err);
+          }
+          return resolve(result);
+        }
+      );
+    })
+  }
+
+  async saveOrderItem(user_id, order_id, product) {
+    return new Promise((resolve, reject) => {
+      this.connection.query(
+        "INSERT INTO `order_items`(`id`, `order_id`, `product_id`, `quantity`) VALUES (?,?,?,?)",
+        [user_id, order_id, product.id, product.quantity],
+        (err, result) => {
+          if (err) {
+            return reject(err);
+          }
+          return resolve(result);
+        }
+      );
+    })
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = () => productsDAO;
