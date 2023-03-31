@@ -26,13 +26,13 @@ class productsDAO {
   orderedList(order = null) {
     return new Promise((resolve, reject) => {
       if (order == 'low-price') {
-        this.connection.query('select * from products ORDER BY price ASC',
+        this.connection.query('SELECT * FROM products INNER JOIN stock on stock.product_id=products.id ORDER BY price ASC',
           (err, result) => {
             if (err) return reject(err);
             return resolve(result);
           });
       }
-      this.connection.query('select * from products ORDER BY ?? DESC', order,
+      this.connection.query('SELECT * FROM products INNER JOIN stock on stock.product_id=products.id ORDER BY ?? DESC', order,
         (err, result) => {
           if (err) return reject(err);
           return resolve(result);
@@ -41,7 +41,7 @@ class productsDAO {
   }
   async listByCategory(idcategory) {
     return new Promise((resolve, reject) => {
-      this.connection.query(`SELECT * FROM products WHERE category = ${idcategory}`,
+      this.connection.query(`SELECT * FROM products p JOIN stock s ON p.id = s.product_id WHERE p.category = ${idcategory}`,
         (err, result) => {
           if (err) return reject(err);
           return resolve(result);

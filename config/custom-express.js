@@ -45,6 +45,7 @@ class AppController {
 
     this.app.engine('hbs', hbs({
       helpers: {
+        dateFormat: require('handlebars-dateformat'),
         json: function (context) {
           return JSON.stringify(context);
         },

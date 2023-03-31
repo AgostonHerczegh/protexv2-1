@@ -112,7 +112,7 @@ header .search-box select {
     padding-top: 1em;
     padding-bottom: 1em;
   }
-  
+
   header .search-box {
     height: 30px;
     width: 20em;
@@ -162,7 +162,7 @@ header .nav-top .actions-items {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
+
   width: 25%;
 }
 
@@ -247,9 +247,13 @@ header .nav-bottom .config-site .config .cta {
   height: 100%;
 }
 
+header .action-item .login {
+  text-decoration: none;
+}
+
 /* Header Dropdowns */
 header .dropdown .submenu-dropdown {
-  box-shadow: 4px 2px 8px rgba(0,0,0,.05);
+  box-shadow: 4px 2px 8px rgba(0, 0, 0, .05);
   background-color: #fff;
   border-radius: 5px;
 }

@@ -1,14 +1,18 @@
 const consign = require("consign");
 
 module.exports = (app) => {
-  app.get('/cart', (req, res) => {
+  app.get('/cart', (req, res, next) => {
+    console.log(app.locals)
+
     let success; const warning = app.helpers.msg(req);
     const connection = app.dao.connectionFactory();
     const productsDao = new app.dao.productsDAO(connection);
 
     // Terméklista ID-k a kosárban
+    if (!req.session.user) {
+      res.redirect('/sign-in')
+    }
     const productsInCartIds = req.session.user.cart
-    console.log(productsInCartIds)
     if (productsInCartIds.length == 0) {
       res.render('checkout/cart', {
         title: 'Kosár',
@@ -41,7 +45,6 @@ module.exports = (app) => {
       }
     }
     req.session.user.cart = cart;
-    console.log(req.session.user.cart)
     res.redirect('/cart');
   })
 
@@ -56,7 +59,6 @@ module.exports = (app) => {
       cart.push(productId)
     }
     req.session.user.cart = cart;
-    console.log(req.session.user.cart)
     res.redirect('/');
   });
 
@@ -66,7 +68,6 @@ module.exports = (app) => {
     const categoriesDAO = new app.dao.categoriesDAO(connection)
     const savedPayments = await userDao.getPaymentInfo(req.session.user).then((result) => result)
 
-    console.log(savedPayments)
     categoriesDAO.getCountries().then((result) => {
       const countries = result;
       res.render('checkout/address', {
@@ -79,5 +80,30 @@ module.exports = (app) => {
     });
 
   });
+  app.get("/empty-cart", (req, res) => {
+    req.session.user.cart = [];
+    res.render('checkout/cart', { user: req.session.user });
+  })
+  app.get("increase-quantity/:id", (req, res) => {
+    const cart = req.session.user.cart
+    const product = cart.find(item => item.id === req.params.id)
+    if (product) {
+      product.quantity += 1
+    }
+    req.session.user.cart = cart;
+    res.locals.session.user.cart = cart;
 
+    console.log(req.session.user.cart)
+    res.render('checkout/cart');
+  })
+  app.get("decrease-quantity/:id", (req, res) => {
+    const cart = req.session.user.cart
+    const product = cart.find(item => item.id === req.params.id)
+    if (product) {
+      product.quantity -= 1
+    }
+    req.session.user.cart = cart;
+    res.locals.session.user.cart = cart;
+    res.render('checkout/cart');
+  })
 };

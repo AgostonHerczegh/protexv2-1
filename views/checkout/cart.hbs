@@ -3,30 +3,37 @@
   </aside>
   <main>
 
-<div class="cart">
+    <div class="cart">
       <h1>Kosár</h1>
       <div class="cart-items">
         {{#each products}}
         <div class="cart-item">
-          <div >
-            <img src="/img/products/{{this.img_url}}" class="cart-item-img" alt="{{this.name}}"></div>
+          <div>
+            <img src="/img/products/{{this.img_url}}" class="cart-item-img" alt="{{this.name}}">
+          </div>
           <div class="cart-item-info">
             <p class="cart-item-name">{{this.name}}</p>
             <p class="cart-item-price">{{this.price}} Ft</p>
+            <a href="/increase-quantity/{{this.id}}"><button style="width:10px">-</button></a>
             <p class="cart-item-quantity">Mennyiség: {{this.quantity}}</p>
+            <a href="/decrease-quantity/{{this.id}}"><button style="width:10px">+</button></a>
+
           </div>
           <div class="cart-item-remove">
             <a href="/remove-from-cart/{{this.id}}"><img src="/img/icons/ic_remove.webp" alt="Törlés"></a>
           </div>
         </div>
         {{/each}}
-    </div>
-    <div class="cart-total">
-      <p class="cart-total-price">Összesen: {{total}} Ft</p><br>
-      <a href="/address"><button class="cart-checkout-button">Tovább</button></a>
-    </div>
+      </div>
+      <div class="emptycart">
+        <a href="/empty-cart"> <button class="emptycart">Kosár kiürítése</button></a>
+      </div>
+      <div class="cart-total">
+        <p class="cart-total-price">Összesen: {{total}} Ft</p><br>
+        <a href="/address"><button class="cart-checkout-button">Tovább</button></a>
+      </div>
   </main>
 </section>
 
 <script>
-</script>     
+</script>

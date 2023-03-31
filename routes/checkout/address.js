@@ -6,7 +6,6 @@ module.exports = (app) => {
     const productsDao = new app.dao.productsDAO(connection);
     const userDao = new app.dao.userDAO(connection);
 
-    console.log(req.body.id)
     if (req.body.id == "") {
       userDao.savePaymentInfo(req.body, req.session.user)
     }

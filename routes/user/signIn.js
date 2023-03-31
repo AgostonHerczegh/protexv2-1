@@ -41,7 +41,7 @@ module.exports = (app) => {
             admin: user.user_type == "ADMIN" ? true : false,
             cart: [],
           };
-          console.log(req.session['user']);
+          app.locals.user = req.session['user'];
           res.redirect('/');
 
         });

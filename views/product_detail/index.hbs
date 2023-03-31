@@ -98,6 +98,7 @@
 
     /* Media queries */
     @media screen and (max-width: 767px) {
+
       /* For phones */
       .product {
         flex-direction: column;
@@ -130,6 +131,7 @@
     }
 
     @media screen and (min-width: 768px) and (max-width: 1023px) {
+
       /* For tablets */
       .product {
         flex-direction: column;
@@ -142,59 +144,59 @@
       }
 
       .product-details {
-      margin-top: 20px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+        margin-top: 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
-    .product-title {
-      font-size: 28px;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 10px;
-      margin-top: -15%;
-    }
+      .product-title {
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: -15%;
+      }
 
-    .product-description {
-      font-size: 20px;
-      text-align: center;
-      margin-bottom: 10px;
-    }
+      .product-description {
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
 
-    .product-price {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+      .product-price {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
 
-    .white-button {
-      background-color: #ffffff;
-      border: 2px solid #cccccc;
-      border-radius: 4px;
-      color: #333333;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      text-underline-offset: none;
-    }
+      .white-button {
+        background-color: #ffffff;
+        border: 2px solid #cccccc;
+        border-radius: 4px;
+        color: #333333;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        text-underline-offset: none;
+      }
 
-    .white-button:hover {
-      background-color: #f5f5f5;
-      border-color: #999999;
-      color: #111111;
-    }
+      .white-button:hover {
+        background-color: #f5f5f5;
+        border-color: #999999;
+        color: #111111;
+      }
 
-    a {
-      text-decoration: none;
-    }
+      a {
+        text-decoration: none;
+      }
   </style>
 </head>
 
@@ -211,29 +213,37 @@
         <a href="/add-to-cart/{{product.id}}">
           <div class="white-button">Vásárlás</div>
         </a>
-    </div>
-  </div>
-  <div class="suggested-products">
-    <div class="container">
-      <div class="suggested-products-title">Ajánlott termékek</div>
-      <div class="suggested-products-container">
-        {{#each suggestedProducts}}
-        <div class="product">
-          <div class="product-image">
-            <img src="/img/products/{{img_url}}" alt="Product Image">
-          </div>
-          <div class="product-details">
-            <div class="product-title">{{name}}</div><br><br>
-            <div class="product-description">{{description}}</div><br><br>
-            <div class="product-price">{{price}}Ft</div><br><br>
-            <a href="/add-to-cart/{{id}}">
-              <div class="white-button">Vásárlás</div>
-            </a>
-          </div>
-        </div>
-        {{/each}}
       </div>
     </div>
+    <div class="suggested-products">
+      <div class="container">
+        <div class="suggested-products-title">Ajánlott termékek</div>
+        <div class="suggested-products-container">
+          {{#each suggestedProducts}}
+          <div class="product">
+            <div class="product-image">
+              <img src="/img/products/{{img_url}}" alt="Product Image">
+            </div>
+            <div class="product-details">
+              <div class="product-title">{{name}}</div><br><br>
+              <div class="product-description">{{description}}</div><br><br>
+              /*--------------------------------------------------------------------------*/
+              <p class="price-stock">
+                {{#if (gt this.db 0)}}
+                <span class="stock" style="color:green">Készleten</span>
+                {{else}}
+                <span class="stock" style="color:red">Nincs készleten</span>
+                {{/if}}
+              </p>
+              <div class="product-price">{{price}}Ft</div><br><br>
+              <a href="/add-to-cart/{{id}}">
+                <div class="white-button">Vásárlás</div>
+              </a>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
 </body>
 
 </html>

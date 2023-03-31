@@ -1,5 +1,7 @@
 {{#each orders}}
+{{dateFormat order_time "dddd, MMMM Do YYYY, h:mm:ss a"}}
 {{#if_eq status "pending"}}
+
 <div>Folyamatban</div>
 {{/if_eq}}
 {{#if_eq status "completed"}}

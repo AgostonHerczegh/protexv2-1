@@ -10,8 +10,35 @@
       </form>
     </div>
     {{# if user }}
-
+    {{#if user.admin}}
     <div class="actions-items">
+      <div class="action-item">
+        <img src="/img/icons/ic_account_circle.png" alt="Bejelentkezés">
+        <div class="user-session">
+          <a href="/admin">Admin</a>
+        </div>
+        <div class="user-session">
+          <a href="/log-out">Kijelentkezés</a>
+        </div>
+        <div class="user-session">
+          <p class="hello">Helló, {{user.username}}</p>
+        </div>
+      </div>
+    </div>
+    {{ else }}
+    <div class="actions-items">
+      <div class="action-item">
+        <img src="/img/icons/ic_account_circle.png" alt="Bejelentkezés">
+        <div class="user-session">
+          <a href="/profile">Profilom</a>
+        </div>
+        <div class="user-session">
+          <a href="/log-out">Kijelentkezés</a>
+        </div>
+        <div class="user-session">
+          <p class="hello">Helló, {{user.username}}</p>
+        </div>
+      </div>
       <div class="action-item">
         <img src="/img/icons/ic_shopping_cart.png" alt="Kosár">
         <a href="/cart"><span id="items-in-cart"></span>Kosár</a>
@@ -21,30 +48,18 @@
         <img src="/img/icons/ic_orders.png" alt="Rendeléseim">
         <a href="/orders"><span id="orders"></span>Rendeléseim</a>
       </div>
-      {{/if}}
-
+    </div>
+    {{/if}}
+    {{ else }}
+    <div class="actions-items">
       <div class="action-item">
         <img src="/img/icons/ic_account_circle.png" alt="Bejelentkezés">
-        {{# if user }}
-        <div class="user-session">
-          <a href="/profile">Profilom</a>
-        </div>
-        {{#if user.admin}}
-        <div class="user-session">
-          <a href="/admin">Admin</a>
-        </div>
-        {{/if}}
-        <div class="user-session">
-          <a href="/log-out">Kijelentkezés</a>
-        </div>
-        <div class="user-session">
-          <p class="hello">Helló, {{user.username}}</p>
-        </div>
-        {{ else }}
-        <a href="/sign-in">Bejelentkezés</a>
-        {{/if}}
+        <a href="/sign-in" style="color: inherit;">Bejelentkezés</a>
       </div>
     </div>
+    {{/if}}
+  </div>
+  </div>
   </div>
   <div class="line-div"></div>
 
