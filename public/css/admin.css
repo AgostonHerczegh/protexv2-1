@@ -3,6 +3,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
+header .search-box {
+
+    display: none;
+}
+
 .addh1 {
     text-align: center;
     color: #4CAF50;
