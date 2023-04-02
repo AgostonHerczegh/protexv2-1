@@ -21,7 +21,7 @@
           <a href="/log-out">Kijelentkezés</a>
         </div>
         <div class="user-session">
-          <p class="hello">Helló, {{user.username}}</p>
+          <p class="hello">Helló, {{user.username}}!</p>
         </div>
       </div>
     </div>
@@ -30,23 +30,20 @@
       <div class="action-item">
         <img src="/img/icons/ic_account_circle.png" alt="Bejelentkezés">
         <div class="user-session">
-          <a href="/profile">Profilom</a>
+          <p class="hello">Helló, {{user.username}}!</p>
+        </div>
+        <div class="action-item">
+          <img src="/img/icons/ic_shopping_cart.png" alt="Kosár">
+          <a href="/cart"><span id="items-in-cart"></span>Kosár</a>
+        </div>
+
+        <div class="action-item">
+          <img src="/img/icons/ic_orders.png" alt="Rendeléseim">
+          <a href="/orders"><span id="orders"></span>Rendeléseim</a>
         </div>
         <div class="user-session">
           <a href="/log-out">Kijelentkezés</a>
         </div>
-        <div class="user-session">
-          <p class="hello">Helló, {{user.username}}</p>
-        </div>
-      </div>
-      <div class="action-item">
-        <img src="/img/icons/ic_shopping_cart.png" alt="Kosár">
-        <a href="/cart"><span id="items-in-cart"></span>Kosár</a>
-      </div>
-
-      <div class="action-item">
-        <img src="/img/icons/ic_orders.png" alt="Rendeléseim">
-        <a href="/orders"><span id="orders"></span>Rendeléseim</a>
       </div>
     </div>
     {{/if}}
