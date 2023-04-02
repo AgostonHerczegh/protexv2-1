@@ -1,4 +1,4 @@
-<form class="address-form" method="post" action="/address">
+<form id="address-form" class="address-form" method="post" action="/address">
     <div class="form-group">
         <label for="address-type">Cím típus kiválasztása</label>
         <select name="address-type" id="address-type" class="form-control">
@@ -45,9 +45,9 @@
             <input type="text" name="number" class="form-control" id="number" placeholder="Adja meg a telefonszámot">
         </div>
         <button type="submit" id="mainButton" class="btn btn-primary">Tovább</button>
-
     </div>
 </form>
+
 <div class="saved-address">
     <div class="form-group">
         <label for="select-saved-address">Válassza ki a mentett címet</label>
@@ -57,7 +57,7 @@
             {{/each}}
         </select>
     </div>
-    <button type="submit" id="submitButton" class="btn btn-primary">TovábbXD</button>
+    <button type="submit" id="submitButton" class="btn btn-primary">Tovább</button>
 </div>
 
 
@@ -95,8 +95,6 @@
 
         selectSavedAddress.addEventListener('change', function (event) {
             const selectedPayment = payments.find(payment => payment.id == selectSavedAddress.value);
-            console.log(selectSavedAddress.options[0].value);
-            console.log(selectedPayment)
             if (selectedPayment) {
                 countrySelect.selectedIndex = selectedPayment.country_id - 1;
                 idInput.value = selectedPayment.id;
@@ -119,5 +117,25 @@
             console.log(event)
             mainButton.click();
         })
+
+        const form = document.querySelector('#address-form');
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            let fieldsFilled = true;
+            const inputs = form.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                if (!input.value) {
+                    fieldsFilled = false;
+                } form.submit();
+
+            });
+            /*
+            if (fieldsFilled) {
+                form.submit();
+            } if else {
+                alert('Minden mezőt töltsön ki!');      BUGOS
+            }
+            */
+        });
     });
 </script>

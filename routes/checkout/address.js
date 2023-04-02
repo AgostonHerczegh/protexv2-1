@@ -55,7 +55,7 @@ module.exports = (app) => {
       await productsDao.saveOrderItem(userID, (latestId[0].id + 1), item)
     });
     req.session.user.cart = [];
-    res.redirect('/');
+    res.redirect('/orders');
   })
 
 };

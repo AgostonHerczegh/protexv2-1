@@ -73,7 +73,7 @@ module.exports = (app) => {
       res.render('checkout/address', {
         savedPayments,
         countries,
-        title: 'Cím',
+        title: 'Szállítási cím megadása',
         csrfToken: req.csrfToken()
       });
 

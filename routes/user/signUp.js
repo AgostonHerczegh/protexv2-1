@@ -19,7 +19,7 @@ module.exports = (app) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    req.checkBody('username', 'Minimum 4 karaktert adjon meg felhasználónévnek!').notEmpty().isLength({min: 4});
+    req.checkBody('username', 'Minimum 4 karaktert adjon meg felhasználónévnek!').notEmpty().isLength({ min: 4 });
     req.checkBody('email', 'Érvényes email-t adjon meg!').notEmpty().isEmail();
     req.checkBody('password', 'Minimum 4 karakteres jelszavat adjon meg!').notEmpty();
     const errosInValidation = req.validationErrors();
@@ -32,20 +32,20 @@ module.exports = (app) => {
     const UserDao = new app.dao.userDAO(connection);
 
     UserDao.saveUser(username, email, password)
-        .then((result) => {
-          req.session['success'] = result;
-          // Create Session
-          req.session['user'] = {
-            username: username,
-            email: email,
-            admin: true,
-            cart: null,
-          };
-          res.redirect('/');
-        })
-        .catch((err) => {
-          req.session['warning'] = err;
-          res.redirect('/sign-up');
-        });
+      .then((result) => {
+        req.session['success'] = result;
+        // Create Session
+        req.session['user'] = {
+          username: username,
+          email: email,
+          admin: false,
+          cart: null,
+        };
+        res.redirect('/');
+      })
+      .catch((err) => {
+        req.session['warning'] = err;
+        res.redirect('/sign-up');
+      });
   });
 };

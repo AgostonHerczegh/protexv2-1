@@ -14,10 +14,13 @@
           <div class="cart-item-info">
             <p class="cart-item-name">{{this.name}}</p>
             <p class="cart-item-price">{{this.price}} Ft</p>
-            <a href="/increase-quantity/{{this.id}}"><button style="width:10px">-</button></a>
+            {{!--
+            <a href="/increase-quantity/{{this.id}}"><button class="quantity-btn">-</button></a>
+            --}}
             <p class="cart-item-quantity">Mennyiség: {{this.quantity}}</p>
-            <a href="/decrease-quantity/{{this.id}}"><button style="width:10px">+</button></a>
-
+            {{!--
+            <a href="/decrease-quantity/{{this.id}}"><button class="quantity-btn">+</button></a>
+            --}}
           </div>
           <div class="cart-item-remove">
             <a href="/remove-from-cart/{{this.id}}"><img src="/img/icons/ic_remove.webp" alt="Törlés"></a>
@@ -32,6 +35,7 @@
         <p class="cart-total-price">Összesen: {{total}} Ft</p><br>
         <a href="/address"><button class="cart-checkout-button">Tovább</button></a>
       </div>
+    </div>
   </main>
 </section>
 

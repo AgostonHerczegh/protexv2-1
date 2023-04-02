@@ -70,42 +70,36 @@
             <span class="payment-icon">
               <i class="fas fa-money-bill-wave"></i>
             </span>
-            <span class="payment-name">Fizetés átvételkor (+400Ft)</span>
+            <span class="payment-name">Fizetés átvételkor</span>
           </span>
         </label>
       </div>
     </div>
-    <button class="btn-primary" id="payment-Btn" disabled>Rendelés leadása</button>
+    <button class="btn-primary" id="payment-Btn">Rendelés leadása</button>
   </form>
-</div>
-</form>
+  <script>
+    const submitBtn = document.getElementById("payment-Btn");
+    const creditCardRadio = document.querySelector('input[name="payment"][value="credit-card"]');
+    const cashRadio = document.querySelector('input[name="payment"][value="cash"]');
 
-<script>
-
-  // Get all the radio buttons on the page
-  const radios = document.querySelectorAll('input[type="radio"]');
-  // Get the submit button
-  const submitBtn = document.getElementById('payment-Btn');
-
-
-
-  // Loop through all the radio buttons
-  radios.forEach(radio => {
-    // Add a change event listener to each radio button
-    radio.addEventListener('change', () => {
-      console.log("changed")
-
-      // When a radio button is changed, enable the submit button
-      submitBtn.disabled = false;
-
-      if (radio.value === "cash") {
-        submitBtn.innerHTML = "Rendelés leadása (+400Ft)";
-        isCash = true;
-      } else {
-        submitBtn.innerHTML = "Rendelés leadása";
-        isCash = false;
+    // Event listener a gombra, hogy ha nincs kiválasztva fizetési mód, akkor ne engedje a rendelést + figyelmeztessen
+    submitBtn.addEventListener("click", function (event) {
+      if (!creditCardRadio.checked && !cashRadio.checked) {
+        event.preventDefault();
+        alert("Válasszon fizetési módot!");
       }
     });
+    // Submit button letiltása, amíg nincs kiválasztva fizetési mód
+    submitBtn.disabled = true;
 
-  });
-</script>
+    // Evemt listener a fizetési módokra, hogy ha egyik módot kiválasztom, akkor engedélyezze a gombot
+    document.querySelectorAll('input[name="payment"]').forEach(radio => {
+      radio.addEventListener("change", function () {
+        submitBtn.disabled = false;
+      });
+    });
+
+
+
+
+  </script>

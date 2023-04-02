@@ -1,16 +1,17 @@
 {{#each orders}}
-{{dateFormat order_time "dddd, MMMM Do YYYY, h:mm:ss a"}}
-{{#if_eq status "pending"}}
-
-<div>Folyamatban</div>
-{{/if_eq}}
-{{#if_eq status "completed"}}
-<div>Kész</div>
-{{/if_eq}}
-
-{{#if_eq status "cancelled"}}
-
-<div>Törölve</div>
-{{/if_eq}}
-
+<div class="order-container">
+    <p class="order-id">Rendelés azonosító:
+    <p class="orderid">{{this.id}}</p>
+    </p>
+    <p class="order-date">{{dateFormat order_time "YYYY.MM.DD. HH:mm"}}</p>
+    {{#if_eq status "pending"}}
+    <div class="order-status order-status--pending">Folyamatban</div>
+    {{/if_eq}}
+    {{#if_eq status "completed"}}
+    <div class="order-status order-status--completed">Kész</div>
+    {{/if_eq}}
+    {{#if_eq status "cancelled"}}
+    <div class="order-status order-status--cancelled">Törölve</div>
+    {{/if_eq}}
+</div>
 {{/each}}

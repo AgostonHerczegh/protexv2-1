@@ -215,35 +215,7 @@
         </a>
       </div>
     </div>
-    <div class="suggested-products">
-      <div class="container">
-        <div class="suggested-products-title">Ajánlott termékek</div>
-        <div class="suggested-products-container">
-          {{#each suggestedProducts}}
-          <div class="product">
-            <div class="product-image">
-              <img src="/img/products/{{img_url}}" alt="Product Image">
-            </div>
-            <div class="product-details">
-              <div class="product-title">{{name}}</div><br><br>
-              <div class="product-description">{{description}}</div><br><br>
-              /*--------------------------------------------------------------------------*/
-              <p class="price-stock">
-                {{#if (gt this.db 0)}}
-                <span class="stock" style="color:green">Készleten</span>
-                {{else}}
-                <span class="stock" style="color:red">Nincs készleten</span>
-                {{/if}}
-              </p>
-              <div class="product-price">{{price}}Ft</div><br><br>
-              <a href="/add-to-cart/{{id}}">
-                <div class="white-button">Vásárlás</div>
-              </a>
-            </div>
-          </div>
-          {{/each}}
-        </div>
-      </div>
+  </div>
 </body>
 
 </html>

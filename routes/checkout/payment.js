@@ -4,7 +4,7 @@ module.exports = (app) => {
 
         res.render('checkout/payment', {
             data: req.body,
-            total: (method == "cash") ? total + 400 : total,
+            /*total: (method == "cash") ? total + 400 : total,*/
             products,
             user: req.session.user,
             csrfToken: req.csrfToken()

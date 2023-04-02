@@ -23,7 +23,7 @@ class AppController {
   middlewares() {
     const storage = multer.diskStorage({
       destination: function (req, file, cb) {
-        cb(null, 'public/img/products') // replace 'uploads/' with the path to your desired folder
+        cb(null, 'public/img/products') // fájl feltöltésének helye
       },
       filename: function (req, file, cb) {
         cb(null, file.originalname)
