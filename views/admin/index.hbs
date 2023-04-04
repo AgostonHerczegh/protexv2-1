@@ -1,101 +1,111 @@
 <head>
     <link rel="stylesheet" href="css/admin.css">
 </head>
-{{!--bug--}}
-<table class="products-table">
-    <thead>
-        <tr>
-            <th>Termék neve</th>
-            <th>Ára</th>
-            <th>Raktáron(db)</th>
-            <th>Törlés</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each products}}
-        <tr class="product-row">
-            <td>{{this.name}}</td>
-            <td>{{this.price}}ft</td>
-            <td>
-                <a href="/admin/delete-item/{{this.id}}" class="delete">X</a>
-            </td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
-<br>
-<br>
-<div class="add-form-container">
-    <h1 class="addh1">Termék hozzáadása:</h1>
-    <form action="/admin/add-item" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="_csrf" value="{{csrfToken}}" class="input-sign">
-        <input type="text" name="name" placeholder="name" />
-        <input type="text" name="desc" placeholder="desc" />
-        <input type="text" name="product_url" placeholder="product_url" />
-        <input type="number" name="price" placeholder="price" />
-        <input type="number" name="category" placeholder="category" />
 
-        <input type="file" name="image">
-        <input type="submit" value="Hozzáadás" />
-    </form>
-</div>
-<table class="categorytable">
 
-    <thead>
-        <tr>
-            <th>Kategória ID</th>
-            <th>Kategória neve</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>Fehérjék</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Kollagének</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Aminosavak</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Kreatinok</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Vitaminok</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Testsúlymenedzsment</td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>Edzés előtti formulák</td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Tömegnövelők</td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>Ételek/snackek</td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>Tesztoszteronok</td>
-        </tr>
-        <tr>
-            <td>11</td>
-            <td>Próbacsomagok</td>
-        </tr>
-        <tr>
-            <td>12</td>
-            <td>Ruházat</td>
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div class="manageorders">
+        <button><a href="/admin/orders">Rendelések kezelése</a></button>
+    </div>
+    <div class="flex-container">
+        <div class="category-container">
+            <h1 class="categoryh1">Kategóriák:</h1>
+            <table class="categorytable">
+                <thead>
+                    <tr>
+                        <th>Kategória ID</th>
+                        <th>Kategória neve</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each categories}}
+                    <tr class="category-row">
+                        <td>{{this.idcategory}}</td>
+                        <td>{{this.category_name}}</td>
+                        <td><a href="/admin/delete-category/{{this.idcategory}}" class="delete">X</a></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="add-category-container">
+            <form action="/admin/add-category" method="post" class="addcategoryform">
+                <h1 class="categoryh1">Kategória hozzáadása:</h1>
+                <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                <input type="text" name="category_name" placeholder="Kategória neve" />
+                <input type="submit" value="Hozzáadás" />
+            </form>
+        </div>
+
+        <div class="flex-container-right">
+            <div class="add-form-container">
+                <form class="addform" action="/admin/add-item" method="post" enctype="multipart/form-data">
+                    <h1 class="addh1">Termék hozzáadása:</h1>
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}" class="input-sign">
+                    <input type="text" name="name" placeholder="name" />
+                    <input type="text" name="desc" placeholder="desc" />
+                    <input type="text" name="product_url" placeholder="product_url" />
+                    <input type="number" name="price" placeholder="price" />
+                    <input type="number" name="category" placeholder="category" />
+                    <input type="file" name="image">
+                    <input type="submit" value="Hozzáadás" />
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="products">
+    <table class="products-table">
+        <thead>
+            <tr>
+                <th>Termék neve</th>
+                <th>Ára</th>
+                <th>Raktáron(db)</th>
+                <th>Törlés</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each products}}
+            <tr class="product-row">
+                <td>{{this.name}}</td>
+                <td>{{this.price}}ft <button class="edit" id="{{this.id}}">Szerkesztés</button></td>
+                <td>{{this.db}}</td>
+                <td>
+                    <a href="/admin/delete-item/{{this.id}}" class="delete">X</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+<form style="" method="post" class="popup" action="/admin/edit-price">
+    <div class="inner">
+        <label for="price-input">Ár szerkesztése</label>
+        <input id="price-input" type="number" name="price" placeholder="Új ár" value="" min="10" step="50">
+        <input type="hidden" id="edit_id" name="id" value="">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <div class="submit-button">
+            <input type="submit" value="Jóváhagy">
+        </div>
+    </div>
+</form>
+<script>
+    var popup = document.querySelector(".popup");
+
+    var edit = document.getElementsByClassName("edit");
+
+    var editid = document.getElementById("edit_id");
+
+    popup.style.display = "none";
+
+    for (var i = 0; i < edit.length; i++) {
+        console.log(edit[i])
+        edit[i].addEventListener("click", function (event) {
+            editid.value = event.srcElement.id;
+            popup.style.display = "block";
+        })
+    }
+</script>

@@ -141,8 +141,8 @@ class productsDAO {
   async saveOrderItem(user_id, order_id, product) {
     return new Promise((resolve, reject) => {
       this.connection.query(
-        "INSERT INTO `order_items`(`id`, `order_id`, `product_id`, `quantity`) VALUES (?,?,?,?)",
-        [user_id, order_id, product.id, product.quantity],
+        "INSERT INTO `order_items`(`order_id`, `product_id`, `quantity`) VALUES (?,?,?)",
+        [order_id, product.id, product.quantity],
         (err, result) => {
           if (err) {
             return reject(err);
@@ -152,7 +152,15 @@ class productsDAO {
       );
     })
   }
-
+  updatePrice(id, price) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('UPDATE products SET price = ? WHERE id = ?', [price, id],
+        (err, result) => {
+          if (err) return reject(err);
+          return resolve(result);
+        });
+    });
+  }
 }
 
 

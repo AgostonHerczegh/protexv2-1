@@ -19,9 +19,7 @@ module.exports = (app) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    req.checkBody('username', 'Minimum 4 karaktert adjon meg felhasználónévnek!').notEmpty().isLength({ min: 4 });
-    req.checkBody('email', 'Érvényes email-t adjon meg!').notEmpty().isEmail();
-    req.checkBody('password', 'Minimum 4 karakteres jelszavat adjon meg!').notEmpty();
+
     const errosInValidation = req.validationErrors();
     if (errosInValidation) {
       req.session['warning'] = errosInValidation[0].msg;
@@ -39,8 +37,9 @@ module.exports = (app) => {
           username: username,
           email: email,
           admin: false,
-          cart: null,
+          cart: [],
         };
+        app.locals.user = req.session['user'];
         res.redirect('/');
       })
       .catch((err) => {

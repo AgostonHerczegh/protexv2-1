@@ -1,5 +1,5 @@
 <section class="sign sign-up">
-  <form action="/sign-up" method="post">
+  <form action="/sign-up" method="post" id="form">
     <div class="input-sign">
       <label for="username">Név:</label>
       <input type="text" id="username" name="username">
@@ -19,3 +19,30 @@
     <p>Már van regisztrált fiókod, <a href="/sign-in">Bejelentkezés</a></p>
   </div>
 </section>
+
+<script>
+  document.getElementById("form").addEventListener("submit", function (event) {
+    event.preventDefault()
+    validateUsername();
+
+  });
+  function isValidUsername(username) {
+    const regex = /^[a-zA-Z ]*$/;
+    return regex.test(username) && username.replace(/\s/g, '').length > 0;
+  }
+
+  function validateUsername() {
+    const username = document.getElementById("username").value;
+    if (isValidUsername(username)) {
+      document.getElementById("form").submit()
+
+    } else {
+      alert("Nem megfelelő név formátum!");
+    }
+
+  }
+
+
+
+
+</script>

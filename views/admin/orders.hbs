@@ -1,0 +1,20 @@
+{{#each orders}}
+<div class="order-container">
+    <p class="order-id">Rendelés azonosító:
+    <p class="orderid">{{this.id}}</p>
+    </p>
+    <p class="order-date">{{dateFormat order_time "YYYY.MM.DD. HH:mm"}}</p>
+    {{#if_eq status "pending"}}
+    <button><a href="/admin/edit-order-status?id={{this.id}}&status=cancelled">Törlés</a></button>
+    <div class="order-status order-status--pending">Folyamatban</div> <button><a
+            href="/admin/edit-order-status?id={{this.id}}&status=completed">Kész</a></button>
+
+    {{/if_eq}}
+    {{#if_eq status "completed"}}
+    <div class="order-status order-status--completed">Kész</div>
+    {{/if_eq}}
+    {{#if_eq status "cancelled"}}
+    <div class="order-status order-status--cancelled">Törölve</div>
+    {{/if_eq}}
+</div>
+{{/each}}

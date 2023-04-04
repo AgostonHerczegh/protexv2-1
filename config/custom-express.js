@@ -9,6 +9,8 @@ const csrf = require('csurf');
 const validator = require('express-validator');
 const cors = require('cors');
 const multer = require('multer');
+const { unless } = require('express-unless');
+const { pathToRegexp, match, parse, compile } = require("path-to-regexp");
 
 
 class AppController {
@@ -29,7 +31,16 @@ class AppController {
         cb(null, file.originalname)
       }
     });
-
+    function myLogger(req, res, next) {
+      if (!req.session.user) {
+        res.redirect('/sign-in')
+      }
+      else {
+        next()
+      }
+    }
+    myLogger.unless = unless
+    this.app.use(express.json());
     this.app.use(multer({ storage: storage }).single('image'));
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
@@ -42,6 +53,8 @@ class AppController {
     this.app.use(cors())
     this.app.use(csrf({ cookie: true }));
     this.app.use(validator());
+    this.app.use(myLogger.unless({ path: ["/", "/product-detail", "/sign-in", "/sign-up", pathToRegexp("/product-detail/:name")], ext: ["css", "png", "jpg", "webp", "js"] }));
+
 
     this.app.engine('hbs', hbs({
       helpers: {
