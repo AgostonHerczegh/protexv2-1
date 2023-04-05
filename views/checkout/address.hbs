@@ -20,7 +20,7 @@
                 {{/each}}
             </select>
         </div>
-        <input type="hidden" name="id" value="" class="input-sign">
+        <input type="hidden" name="id" value="0" class="input-sign">
 
         <input type="hidden" name="_csrf" value="{{csrfToken}}" class="input-sign">
         <div class="form-group">
@@ -70,6 +70,7 @@
         const addressTypeSelect = document.getElementById('address-type');
         const newAddressDiv = document.querySelector('.new-address');
         const savedAddressDiv = document.querySelector('.saved-address');
+
         addressTypeSelect.addEventListener('change', function (event) {
             if (event.target.value === 'new') {
                 newAddressDiv.style.display = 'block';
@@ -81,7 +82,8 @@
             selectSavedAddress.selectedIndex = 0;
             selectSavedAddress.dispatchEvent(new Event('change'));
         });
-
+        addressTypeSelect.value = 'new';
+        addressTypeSelect.dispatchEvent(new Event('change'));
         const idInput = document.querySelector('input[name="id"]');
 
 
@@ -92,6 +94,11 @@
         const zipCodeInput = document.querySelector('input[name="zip-code"]');
         const numberInput = document.querySelector('input[name="number"]');
         const countrySelect = document.querySelector('select[name="country"]');
+
+        countrySelect.addEventListener('change', function (event) {
+            idInput.value = countrySelect.selectedIndex + 1;
+
+        });
 
         selectSavedAddress.addEventListener('change', function (event) {
             const selectedPayment = payments.find(payment => payment.id == selectSavedAddress.value);
@@ -118,24 +125,32 @@
             mainButton.click();
         })
 
-        const form = document.querySelector('#address-form');
+        const form = document.getElementById('address-form');
+        function isValidInput(input) {
+            const regex = /^[a-zA-Z0-9áÁéÉíÍóÓöÖőŐúÚüÜűŰ\s]+$/g;
+            return regex.test(input);
+        }
         form.addEventListener('submit', (event) => {
             event.preventDefault();
             let fieldsFilled = true;
             const inputs = form.querySelectorAll('input, select');
             inputs.forEach(input => {
-                if (!input.value) {
+                if (input.type != "hidden" && input.value == '' || (input.type == "text" && !isValidInput(input.value))) {
+                    console.log(input)
+                    input.style.border = '1px solid red';
                     fieldsFilled = false;
-                } form.submit();
+                }
+                else {
 
+                    input.style.border = '1px solid #ced4da';
+                }
             });
-            /*
+
             if (fieldsFilled) {
                 form.submit();
-            } if else {
-                alert('Minden mezőt töltsön ki!');      BUGOS
+            } else {
+                alert('Minden mezőt ki kell tölteni!');
             }
-            */
         });
     });
 </script>

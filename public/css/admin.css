@@ -8,6 +8,39 @@ header .search-box {
     display: none;
 }
 
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.manageorders {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.manageorders button {
+    background-color: #ffe59d;
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: black 2px solid;
+    border-radius: 40px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+/* Termék hozzáadása panel  */
+.add-form-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
 .addh1 {
     text-align: center;
     color: #4CAF50;
@@ -15,7 +48,19 @@ header .search-box {
     margin: 20px 0;
 }
 
-form {
+.addform {
+    background-color: white;
+    padding: 20px;
+    margin: auto;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    margin-left: 580px;
+    margin-right: 20px;
+}
+
+/*Kategória hozzáadása panel*/
+.categoryform {
     background-color: white;
     padding: 20px;
     margin: auto;
@@ -26,6 +71,65 @@ form {
     margin-right: 20px;
 
 }
+
+.category-container {
+    background-color: white;
+    flex: 1;
+    margin-right: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.add-category-container {
+    flex: 1;
+}
+
+.addcategoryform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin: 10px auto;
+}
+
+.categoryh1 {
+    text-align: center;
+    color: #4CAF50;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.categoryform input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    font-size: 16px;
+}
+
+.categoryform input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+.categoryform input[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+
+/* General inputbeallitasok  */
 
 input[type=text],
 input[type=number],
@@ -117,13 +221,11 @@ th {
 
 .container {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
 }
 
-.form {
-    flex: 1;
-    margin-right: 20px;
-}
+
 
 .table {
     flex: 1;
@@ -134,3 +236,63 @@ th {
     width: min-content;
     margin: 20px 0;
 }
+
+/*Popup az arhoz*/
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup .inner {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.774);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.popup label {
+    color: black;
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.popup input[type="number"] {
+
+    width: 20%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    color: black;
+    margin: 0 auto;
+}
+
+.popup .submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #008CBA;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    20px 0;
