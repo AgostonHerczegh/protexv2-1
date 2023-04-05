@@ -8,7 +8,7 @@ module.exports = (app) => {
             categoriesDAO.list()
                 .then((result) => categories = result)
                 .catch((err) => warning = 'Nem lehetett betölteni a kategóriákat');
-            productsDAO.list(9)
+            productsDAO.list()
                 .then((result) => products = result)
                 .catch((err) => warning = 'Nem lehetett betölteni a termékeket');
 
@@ -50,6 +50,63 @@ module.exports = (app) => {
                     res.redirect('/admin')
                 })
                 .catch((err) => console.log(err));
+        }
+    })
+
+    app.get('/admin/delete-category/:id', (req, res) => {
+        if (req.session.user && req.session.user.admin) {
+            const connection = app.dao.connectionFactory();
+            const categoriesDAO = new app.dao.categoriesDAO(connection);
+            console.log(req.body.id)
+            categoriesDAO.delete(req.params.id)
+                .then((result) => {
+                    res.redirect('/admin')
+                })
+                .catch((err) => console.log(err));
+        }
+    })
+    app.post('/admin/add-category', (req, res) => {
+        if (req.session.user && req.session.user.admin) {
+            const connection = app.dao.connectionFactory();
+            const categoriesDAO = new app.dao.categoriesDAO(connection);
+            categoriesDAO.save(req.body)
+                .then((result) => {
+                    res.redirect('/admin')
+                })
+                .catch((err) => console.log(err));
+        }
+    })
+    app.post('/admin/edit-price', (req, res) => {
+        if (req.session.user && req.session.user.admin) {
+            const connection = app.dao.connectionFactory();
+            const productsDAO = new app.dao.productsDAO(connection);
+            console.log(req.body)
+            productsDAO.updatePrice(req.body.id, req.body.price)
+                .then((result) => {
+                    res.redirect('/admin')
+                })
+                .catch((err) => console.log(err));
+        }
+    })
+    app.get('/admin/orders', async (req, res) => {
+        if (req.session.user && req.session.user.admin) {
+            const connection = app.dao.connectionFactory();
+            const userDao = new app.dao.userDAO(connection);
+            const orders = await userDao.getAllOrders();
+
+            res.render('admin/orders', {
+                title: 'Rendelések | Protex',
+                orders,
+            })
+        }
+    })
+    app.get('/admin/edit-order-status/', async (req, res) => {
+        if (req.session.user && req.session.user.admin) {
+            const connection = app.dao.connectionFactory();
+            const userDao = new app.dao.userDAO(connection);
+            await userDao.updateOrderStatus(req.query.id, req.query.status);
+
+            res.redirect('/admin/orders')
         }
     })
 }

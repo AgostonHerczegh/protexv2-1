@@ -2,22 +2,15 @@ class categoriesDAO {
   constructor(connection) {
     this.connection = connection;
   }
-  list(limit = null) {
+  list() {
     return new Promise((resolve, reject) => {
-      if (limit) {
-        this.connection
-          .query('select * from product_categories limit ?', limit,
-            (err, result) => {
-              if (err) return reject(err);
-              return resolve(result);
-            });
-      }
       this.connection
         .query('select * from product_categories',
           (err, result) => {
             if (err) return reject(err);
             return resolve(result);
           });
+
     });
   }
 
@@ -27,6 +20,25 @@ class categoriesDAO {
         if (err) return reject(err);
         return resolve(result);
       });
+    });
+  }
+
+  delete(id) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('delete from product_categories where idcategory = ?', id,
+        (err, result) => {
+          if (err) return reject(err);
+          return resolve(result);
+        });
+    });
+  }
+  save(category) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('INSERT INTO `product_categories`(`category_name`) VALUES (?)', category.category_name,
+        (err, result) => {
+          if (err) return reject(err);
+          return resolve(result);
+        });
     });
   }
 }

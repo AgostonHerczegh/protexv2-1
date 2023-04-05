@@ -101,6 +101,26 @@ class UserDAO {
         });
     });
   }
+
+  async getAllOrders() {
+    return new Promise((resolve, reject) => {
+      this.connection.query('select * from orders',
+        (err, result) => {
+          if (err) return reject(err);
+          return resolve(result);
+        });
+    });
+  }
+  updateOrderStatus(id, status) {
+    return new Promise((resolve, reject) => {
+      this.connection.query('update orders set status = ? where id = ?', [status, id],
+        (err, result) => {
+          if (err) return reject(err);
+          return resolve(result);
+        });
+    });
+  }
 }
+
 
 module.exports = () => UserDAO;
